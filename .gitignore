@@ -82,3 +82,4 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/macos,windows,netbeans
+/Hopital2018/nbproject/private/
