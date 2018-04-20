@@ -1,4 +1,3 @@
-
 package model;
 /*
  * 
@@ -50,17 +49,18 @@ public class Connexion {
         Class.forName("com.mysql.jdbc.Driver");
 
         // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-        String urlDatabase = "jdbc:mysql://localhost/" + nameDatabase;//  + nameDatabase;//!!!"8889" macOS only!!!
+        String urlDatabase = "jdbc:mysql://localhost:8889/" + nameDatabase;//  + nameDatabase;//!!!"8889" macOS only!!!
         //création d'une connexion JDBC à la base 
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
         //System.out.print(" "+urlDatabase +" " + loginDatabase + " " +passwordDatabase );
         stmt = conn.createStatement();
-        rset = stmt.executeQuery("select * from " + "docteur");
-        // création d'un ordre SQL (statement)
-        
-        
+        //rset = stmt.executeQuery("select * from " + "docteur");
+    }
+    
+    public void findAll(String table) throws SQLException {
+        rset = stmt.executeQuery("select * from " + table);
+         // création d'un ordre SQL (statement)
         rsetMeta = rset.getMetaData();
-
     }
 
     /**
@@ -211,3 +211,4 @@ public class Connexion {
         stmt.executeUpdate(requeteMaj);
     }
 }
+
