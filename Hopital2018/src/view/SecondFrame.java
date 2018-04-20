@@ -30,16 +30,18 @@ public class SecondFrame extends JFrame{
         JPanel pane = new JPanel();
         
         javax.swing.JTextField[] texte = new javax.swing.JTextField[nbColonnes];
-        System.out.println(nbColonnes); 
+        javax.swing.JLabel[] label = new javax.swing.JLabel[nbColonnes];
          for(int i = 1; i <= nbColonnes; i++)
-      {
-          texte[i-1] = new javax.swing.JTextField(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
-        System.out.println(texte[i-1].getText());  
-         pane.add(texte[i-1]);
-      }
-         pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
-         getContentPane().add(pane);
-         
+
+        {
+            label[i-1] = new javax.swing.JLabel(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
+            texte[i-1] = new javax.swing.JTextField();
+            System.out.println(texte[i-1].getText()); 
+            pane.add(label[i-1]);
+            pane.add(texte[i-1]);
+        }
+        pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+        getContentPane().add(pane);
         this.setVisible(true);
     }
     
