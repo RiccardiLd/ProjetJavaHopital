@@ -138,7 +138,7 @@ public class HopitalUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String path = hopitalTree.getClosestPathForLocation(evt.getX(), evt.getY()).toString();
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
-            String table = "N/A";
+            String table = "";
             if (path.contains("Service")) {
                 table = "service";
             }
@@ -163,7 +163,7 @@ public class HopitalUI extends javax.swing.JFrame {
             else if (path.contains("Soigne")) {
                 table = "soigne";
             }
-            if (!table.contains("N/A")) {
+            if (!table.equals("")) {
                 try {
                     controleur.findAll(table);
                     controleur.updateModel();
@@ -175,12 +175,8 @@ public class HopitalUI extends javax.swing.JFrame {
         }
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
             jPopupMenuTree.removeAll();
-            javax.swing.JMenuItem item1 = new javax.swing.JMenuItem("Add " + path);
-            javax.swing.JMenuItem item2 = new javax.swing.JMenuItem("Remove " + path);
-            javax.swing.JMenuItem item3 = new javax.swing.JMenuItem("Find by... ");
+            javax.swing.JMenuItem item1 = new javax.swing.JMenuItem("Find by... ");
             jPopupMenuTree.add(item1);
-            jPopupMenuTree.add(item2);
-            jPopupMenuTree.add(item3);
             jPopupMenuTree.show(hopitalTree.getComponentAt(evt.getX(), evt.getY()), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_hopitalTreeMouseReleased
@@ -189,6 +185,7 @@ public class HopitalUI extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             new SecondFrame(controleur, "Add");
+            
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }

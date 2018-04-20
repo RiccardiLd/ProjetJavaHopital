@@ -63,6 +63,12 @@ public class Connexion {
          // création d'un ordre SQL (statement)
         rsetMeta = rset.getMetaData();
     }
+    
+    public void query(String query) throws SQLException {
+        rset = stmt.executeQuery(query);
+         // création d'un ordre SQL (statement)
+        rsetMeta = rset.getMetaData();
+    }
 
     /**
      * Constructeur avec 4 paramètres : username et password ECE, login et

@@ -6,11 +6,9 @@ package view;
 import javax.swing.JFrame;
 import controller.Controller;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.sql.SQLException;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import model.*;
 
 /**
  *
@@ -121,8 +119,6 @@ public class SecondFrame extends JFrame{
             }
             requete += ")";
             
-            System.out.println(requete);
-            //System.out.println(verifTexteExiste(label[1].getText().trim())+"1");
             return requete;
         }
         return "";
@@ -137,7 +133,13 @@ public class SecondFrame extends JFrame{
     private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)  {
         // TODO add your handling code here:
         try{
-            createAddQuery();
+            String query = createAddQuery();
+            if(!query.equals("")) {
+                System.out.println(query);
+                controleur.query(query);
+            }
+            else System.out.println("\nErreur requete vide.");
+            this.dispose();
         }
         catch (SQLException ex){
             

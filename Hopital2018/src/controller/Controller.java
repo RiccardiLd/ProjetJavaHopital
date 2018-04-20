@@ -30,6 +30,10 @@ public class Controller {
         maConnexion.findAll(table);
     }
     
+    public void query(String query) throws SQLException {
+        maConnexion.query(query);
+    }
+    
     public void updateModel() throws SQLException {
         model = new MyModel();
         model.addRow();
