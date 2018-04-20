@@ -24,14 +24,13 @@ public class Controller {
     public Controller(String nameDatabase, String loginDatabase, String passwordDatabase) 
             throws SQLException, ClassNotFoundException {
         maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase);
-        //init();
     }
     
     public void findAll(String table) throws SQLException{
         maConnexion.findAll(table);
     }
     
-    public void init() throws SQLException {
+    public void updateModel() throws SQLException {
         model = new MyModel();
         model.addRow();
      

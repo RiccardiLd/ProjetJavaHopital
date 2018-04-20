@@ -130,31 +130,31 @@ public class HopitalUI extends javax.swing.JFrame {
             if (path.contains("Service")) {
                 table = "service";
             }
-            if (path.contains("Chambre")) {
+            else if (path.contains("Chambre")) {
                 table = "chambre";
             }
-            if (path.contains("Employé")) {
+            else if (path.contains("Employé")) {
                 table = "employe";
             }
-            if (path.contains("Docteur")) {
+            else if (path.contains("Docteur")) {
                 table = "docteur";
             }
-            if (path.contains("Infirmier")) {
+            else if (path.contains("Infirmier")) {
                 table = "infirmier";
             }
-            if (path.contains("Malade")) {
+            else if (path.contains("Malade")) {
                 table = "malade";
             }
-            if (path.contains("Hospitalisation")) {
+            else if (path.contains("Hospitalisation")) {
                 table = "hospitalisation";
             }
-            if (path.contains("Soigne")) {
+            else if (path.contains("Soigne")) {
                 table = "soigne";
             }
             if (!table.contains("N/A")) {
                 try {
                     controleur.findAll(table);
-                    controleur.init();
+                    controleur.updateModel();
                     jTable1.setModel(controleur.model);
                 } catch (SQLException ex) {
                     Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
