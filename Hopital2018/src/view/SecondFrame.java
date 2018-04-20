@@ -5,6 +5,8 @@ package view;
 
 import javax.swing.JFrame;
 import controller.Controller;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.sql.SQLException;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -28,21 +30,34 @@ public class SecondFrame extends JFrame{
     
     private void init() throws SQLException {
         JPanel pane = new JPanel();
+        JPanel buttonPane = new JPanel();
+        JPanel fieldPane = new JPanel();
+        
+        javax.swing.JButton jButtonOk = new javax.swing.JButton("Ok");
+        javax.swing.JButton jButtonCancel = new javax.swing.JButton("Cancel");
         
         javax.swing.JTextField[] texte = new javax.swing.JTextField[nbColonnes];
         javax.swing.JLabel[] label = new javax.swing.JLabel[nbColonnes];
+                
          for(int i = 1; i <= nbColonnes; i++)
-
         {
             label[i-1] = new javax.swing.JLabel(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
             texte[i-1] = new javax.swing.JTextField();
-            System.out.println(texte[i-1].getText()); 
-            pane.add(label[i-1]);
-            pane.add(texte[i-1]);
+            texte[i-1].setPreferredSize(new Dimension(200,25));
+            fieldPane.add(label[i-1]);
+            fieldPane.add(texte[i-1]);
         }
+        fieldPane.setLayout(new BoxLayout(fieldPane, BoxLayout.PAGE_AXIS));
+        buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
+        buttonPane.add(jButtonOk);
+        buttonPane.add(jButtonCancel); 
+        pane.add(fieldPane);
+        pane.add(buttonPane);
         pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
         getContentPane().add(pane);
+        pack();
         this.setVisible(true);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
 }
