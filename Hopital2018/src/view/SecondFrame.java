@@ -22,7 +22,8 @@ public class SecondFrame extends JFrame{
     int nbColonnes;
     
     
-    public SecondFrame(Controller controleur) throws SQLException {
+    public SecondFrame(Controller controleur, String frameName) throws SQLException {
+        super(frameName);
         this.controleur = controleur;
         nbColonnes = controleur.maConnexion.rsetMeta.getColumnCount();
         init();
@@ -63,6 +64,7 @@ public class SecondFrame extends JFrame{
         getContentPane().add(pane);
         pack();
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
