@@ -141,6 +141,20 @@ public class HopitalUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_hopitalTreeMouseReleased
 
+    public static void affDiagramme()
+    {
+        PieChart demo = new PieChart("controleur.maConnexion.tables.get(0)", "Which operating system are you using?");
+        demo.pack();
+        demo.setVisible(true);
+        demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        BarChart chart = new BarChart("Test Bar", "Tu pense qu'on peux mettre de jolies couleurs?");
+        chart.pack( );        
+        RefineryUtilities.centerFrameOnScreen( chart );        
+        chart.setVisible( true ); 
+        chart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -175,18 +189,7 @@ public class HopitalUI extends javax.swing.JFrame {
                 Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
             } 
         });
-        
-        PieChart demo = new PieChart("" , "Which operating system are you using?");
-        demo.pack();
-        demo.setVisible(true);
-        demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        BarChart chart = new BarChart("Test Bar", "Tu pense qu'on peux mettre de jolies couleurs?");
-        chart.pack( );        
-        RefineryUtilities.centerFrameOnScreen( chart );        
-        chart.setVisible( true ); 
-        chart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
+        affDiagramme();
     }
 
     private final Controller controleur;
