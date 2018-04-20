@@ -124,6 +124,55 @@ public class SecondFrame extends JFrame{
         return "";
     }
     
+    private String createDeleteQuery() throws SQLException
+    {
+        
+        int j=0;
+        int cpt=0;
+        String requete = "DELETE FROM " + controleur.maConnexion.rsetMeta.getTableName(1) + " WHERE ";
+        
+        for(int i =0; i<nbColonnes; i++)
+        {
+            if(!texte[i].getText().trim().equals(""))
+            {
+                cpt++;
+                
+            }
+        }
+        if(cpt != 0)
+        {
+            for(int i =0; i<nbColonnes; i++)
+            {
+                if(!texte[i].getText().trim().equals(""))
+                {
+                    requete += label[i].getText().trim();
+                    requete += "= ";
+                    requete += texte[i].getText().trim();
+                    j+=1;
+                    
+                    if(j!=0 && j!=cpt)
+                    {
+                        requete += "and ";
+                        
+                    }
+                    
+                    
+                }
+            }
+            
+            
+            
+            
+            System.out.println(requete);
+
+            return requete;
+        }
+        
+        return "";
+                
+        
+        
+    }
     
     
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {
