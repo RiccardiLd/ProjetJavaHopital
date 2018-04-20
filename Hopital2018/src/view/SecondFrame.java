@@ -75,5 +75,6 @@ public class SecondFrame extends JFrame{
     
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) { 
         // TODO add your handling code here:
+        this.dispose();
     }
 }
