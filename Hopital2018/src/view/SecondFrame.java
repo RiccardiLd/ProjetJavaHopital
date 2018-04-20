@@ -6,6 +6,7 @@ package view;
 import javax.swing.JFrame;
 import controller.Controller;
 import java.sql.SQLException;
+import javax.swing.JPanel;
 import model.*;
 
 /**
@@ -25,12 +26,17 @@ public class SecondFrame extends JFrame{
     }
     
     private void init() throws SQLException {
+        JPanel pane = new JPanel();
+        
         javax.swing.JTextField[] texte = new javax.swing.JTextField[nbColonnes];
-        /*for(int i = 1; i <= nbColonnes; i++)
+        System.out.println(nbColonnes); 
+         for(int i = 1; i <= nbColonnes; i++)
       {
-          texte[i] = new javax.swing.JTextField(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
-          this.add(texte[i]);
-      }*/
+          texte[i-1] = new javax.swing.JTextField(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
+        System.out.println(texte[i-1].getText());  
+         pane.add(texte[i-1]);
+      }
+         getContentPane().add(pane);
         this.setVisible(true);
     }
     
