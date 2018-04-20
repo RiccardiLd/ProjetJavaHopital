@@ -6,6 +6,7 @@ package view;
 import javax.swing.JFrame;
 import controller.Controller;
 import java.sql.SQLException;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import model.*;
 
@@ -36,7 +37,9 @@ public class SecondFrame extends JFrame{
         System.out.println(texte[i-1].getText());  
          pane.add(texte[i-1]);
       }
+         pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
          getContentPane().add(pane);
+         
         this.setVisible(true);
     }
     
