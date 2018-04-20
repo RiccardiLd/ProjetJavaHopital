@@ -49,9 +49,6 @@ public class SecondFrame extends JFrame{
         });
         
         
-        
-        
-        
         for(int i = 1; i <= nbColonnes; i++)
         {
             label[i-1] = new javax.swing.JLabel(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
@@ -80,7 +77,6 @@ public class SecondFrame extends JFrame{
     
     private String createAddQuery() throws SQLException
     {
-        
         int j=0;
         int cpt=0;
         String requete = "INSERT INTO " + controleur.maConnexion.rsetMeta.getTableName(1) + " (";
