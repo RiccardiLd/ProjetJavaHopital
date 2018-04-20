@@ -5,6 +5,8 @@ package view;
 
 import javax.swing.JFrame;
 import controller.Controller;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.sql.SQLException;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -22,34 +24,63 @@ public class SecondFrame extends JFrame{
     javax.swing.JLabel[] label;
     
     
-    public SecondFrame(Controller controleur) throws SQLException {
+    public SecondFrame(Controller controleur, String frameName) throws SQLException {
+        super(frameName);
         this.controleur = controleur;
         nbColonnes = controleur.maConnexion.rsetMeta.getColumnCount();
         texte = new javax.swing.JTextField[nbColonnes];
         label = new javax.swing.JLabel[nbColonnes];
         init();
-        createAddRequete();
+        //createAddRequete();
     }
     
     private void init() throws SQLException {
         JPanel pane = new JPanel();
+        JPanel buttonPane = new JPanel();
+        JPanel fieldPane = new JPanel();
         
+        javax.swing.JButton jButtonOk = new javax.swing.JButton("Ok");
+        jButtonOk.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jButtonOkActionPerformed(evt);
+        });
+        javax.swing.JButton jButtonCancel = new javax.swing.JButton("Cancel");
+        jButtonCancel.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jButtonCancelActionPerformed(evt);
+        });
         
-        
-         for(int i = 1; i <= nbColonnes; i++)
 
+        javax.swing.JTextField[] texte = new javax.swing.JTextField[nbColonnes];
+        javax.swing.JLabel[] label = new javax.swing.JLabel[nbColonnes];
+                
+
+         for(int i = 1; i <= nbColonnes; i++)
         {
             label[i-1] = new javax.swing.JLabel(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
             texte[i-1] = new javax.swing.JTextField();
-            System.out.println(texte[i-1].getText()); 
-            pane.add(label[i-1]);
-            pane.add(texte[i-1]);
+            texte[i-1].setPreferredSize(new Dimension(200,25));
+            fieldPane.add(label[i-1]);
+            fieldPane.add(texte[i-1]);
         }
+        fieldPane.setLayout(new BoxLayout(fieldPane, BoxLayout.PAGE_AXIS));
+        buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
+        buttonPane.add(jButtonOk);
+        buttonPane.add(jButtonCancel); 
+        pane.add(fieldPane);
+        pane.add(buttonPane);
         pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
         getContentPane().add(pane);
+        pack();
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
+    
+    private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) { 
+        // TODO add your handling code here:
+    }
+    
+
      private String createAddRequete() throws SQLException
 {
     /*
@@ -96,5 +127,11 @@ INSERT INTO T_TITRE (TIT_CODE, TIT_LIBELLE)
         return false;
     }
         
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) { 
+        // TODO add your handling code here:
+        this.dispose();
+    }
+
 }
    
