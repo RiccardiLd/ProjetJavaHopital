@@ -44,6 +44,7 @@ public class HopitalUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,13 +100,22 @@ public class HopitalUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton1.setText("Diagramme");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -118,7 +128,8 @@ public class HopitalUI extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 177, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
 
@@ -141,24 +152,23 @@ public class HopitalUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_hopitalTreeMouseReleased
 
-    public static void affDiagramme()
-    {
-        PieChart demo = new PieChart("controleur.maConnexion.tables.get(0)", "Which operating system are you using?");
-        demo.pack();
-        demo.setVisible(true);
-        demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        BarChart chart = new BarChart("Test Bar", "Tu pense qu'on peux mettre de jolies couleurs?");
-        chart.pack( );        
-        RefineryUtilities.centerFrameOnScreen( chart );        
-        chart.setVisible( true ); 
-        chart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            BarChart chart = new BarChart(controleur.maConnexion);
+            chart.affBarChart();
+            PieChart demo = new PieChart("nn", "Which operating system are you using?");
+            demo.affPieChart();
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -189,12 +199,13 @@ public class HopitalUI extends javax.swing.JFrame {
                 Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
             } 
         });
-        affDiagramme();
+        
     }
 
     private final Controller controleur;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree hopitalTree;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenuTree;
     private javax.swing.JScrollPane jScrollPane1;

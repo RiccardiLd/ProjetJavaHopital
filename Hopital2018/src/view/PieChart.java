@@ -69,4 +69,11 @@ public class PieChart extends JFrame {
         return chart;
 
     }
+    
+    public void affPieChart()
+    {
+        this.pack();
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 }

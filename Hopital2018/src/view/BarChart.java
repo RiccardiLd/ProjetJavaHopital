@@ -5,7 +5,11 @@
  */
 package view;
 
+//import controller.Controller;
+import java.sql.SQLException;
 import javax.swing.JFrame;
+import java.lang.*;
+import model.Connexion;
 
 
 /*
@@ -27,10 +31,11 @@ import org.jfree.ui.RefineryUtilities;
  */
 public class BarChart extends JFrame{
     
-    public BarChart(String applicationTitle , String chartTitle) {
-        super(applicationTitle);
+    public BarChart(Connexion maConnexion) throws SQLException {
+        //super(maConnexion.rsetMeta.getTableName(1));  ->plante quand j'appuie sur diagramme
+        super("poney");
         JFreeChart barChart = ChartFactory.createBarChart(
-         chartTitle,           
+         "Titre",               //chartTitle,           
          "Abscisse",            
          "Ordonnee",            
          createDataset(),          
@@ -41,7 +46,7 @@ public class BarChart extends JFrame{
       chartPanel.setPreferredSize(new java.awt.Dimension( 560 , 367 ) );        
       setContentPane( chartPanel ); 
     }
-    
+
     private CategoryDataset createDataset( ) {
       final String rouge = "Rouge";        
       final String bleu = "Bleu";        
@@ -65,5 +70,13 @@ public class BarChart extends JFrame{
 
       return dataset; 
    }
+    
+    public void affBarChart()
+    {
+        this.pack( );        
+        RefineryUtilities.centerFrameOnScreen( this );        
+        this.setVisible( true ); 
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
    
 }
