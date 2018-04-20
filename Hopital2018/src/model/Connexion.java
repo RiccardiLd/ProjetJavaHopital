@@ -69,6 +69,13 @@ public class Connexion {
          // création d'un ordre SQL (statement)
         rsetMeta = rset.getMetaData();
     }
+     public void queryUpdate(String query) throws SQLException {
+         System.out.println(query + "ok") ;
+       stmt = conn.createStatement();
+       stmt.executeUpdate(query);
+         // création d'un ordre SQL (statement)
+        //rsetMeta = rset.getMetaData();
+    }
 
     /**
      * Constructeur avec 4 paramètres : username et password ECE, login et
@@ -141,8 +148,6 @@ public class Connexion {
     public ArrayList remplirChampsTable(String table) throws SQLException {
         // récupération de l'ordre de la requete
         
-        
-
         // récupération du résultat de l'ordre
         rsetMeta = rset.getMetaData();
 

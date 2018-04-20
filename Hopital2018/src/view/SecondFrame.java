@@ -78,7 +78,14 @@ public class SecondFrame extends JFrame{
         int j=0;
         int cpt=0;
         String requete = "INSERT INTO " + controleur.maConnexion.rsetMeta.getTableName(1) + " (";
-        
+        /*for(int i = 1; i <= nbColonnes; i++)
+        {
+            label[i-1] = new javax.swing.JLabel(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
+            texte[i-1] = new javax.swing.JTextField();
+            texte[i-1].setPreferredSize(new Dimension(200,25));
+            fieldPane.add(label[i-1]);
+            fieldPane.add(texte[i-1]);
+        }*/
         for(int i =0; i<nbColonnes; i++)
         {
             if(!texte[i].getText().trim().equals(""))
@@ -92,7 +99,7 @@ public class SecondFrame extends JFrame{
             {
                 if(!texte[i].getText().trim().equals(""))
                 {
-                    requete += label[i].getText().trim();
+                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
                     j+=1;
                     
                     if(j!=0 && j!=cpt)
@@ -160,10 +167,7 @@ public class SecondFrame extends JFrame{
                 }
             }
             
-            
-            
-            
-            System.out.println(requete);
+            //System.out.println(requete);
 
             return requete;
         }
@@ -185,7 +189,8 @@ public class SecondFrame extends JFrame{
             String query = createAddQuery();
             if(!query.equals("")) {
                 System.out.println(query);
-                controleur.query(query);
+                System.out.println("MDR");
+                controleur.queryUpdate(query);
             }
             else System.out.println("\nErreur requete vide.");
             this.dispose();

@@ -33,6 +33,9 @@ public class Controller {
     public void query(String query) throws SQLException {
         maConnexion.query(query);
     }
+    public void queryUpdate(String query) throws SQLException {
+        maConnexion.queryUpdate(query);
+    }
     
     public void updateModel() throws SQLException {
         model = new MyModel();
