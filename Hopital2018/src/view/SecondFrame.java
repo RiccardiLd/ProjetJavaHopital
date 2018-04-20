@@ -49,8 +49,7 @@ public class SecondFrame extends JFrame{
         });
         
 
-        javax.swing.JTextField[] texte = new javax.swing.JTextField[nbColonnes];
-        javax.swing.JLabel[] label = new javax.swing.JLabel[nbColonnes];
+        
                 
 
          for(int i = 1; i <= nbColonnes; i++)
@@ -76,12 +75,10 @@ public class SecondFrame extends JFrame{
     }
     
     
-    private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) { 
-        // TODO add your handling code here:
-    }
+    
     
 
-     private String createAddRequete() throws SQLException
+     private String createAddQuery() throws SQLException
 {
     /*
 INSERT INTO T_TITRE (TIT_CODE, TIT_LIBELLE)
@@ -90,16 +87,16 @@ INSERT INTO T_TITRE (TIT_CODE, TIT_LIBELLE)
                 ('Mme.'  , 'Madame');*/
     
        String requete = "INSERT INTO " + controleur.maConnexion.rsetMeta.getTableName(1) + " (";
-       for(int i =0; i<nbColonnes; i++)
+       /*for(int i =0; i<nbColonnes; i++)
        {
-          if(verifTexteExiste(label[i].getText().trim()))
-           {
+          //if(verifTexteExiste(label[i].getText().trim()))
+          // {
            requete += label[i].getText().trim();
            if(nbColonnes>i+1)
            requete += ", ";
-           }
-       }
-       
+           //}
+       }*/
+       /*
        requete += ") VALUES ( ";
         
        for(int i =0; i<nbColonnes; i++)
@@ -111,11 +108,11 @@ INSERT INTO T_TITRE (TIT_CODE, TIT_LIBELLE)
            requete += ", ";
            }
            
-       }
+       }*/
        requete += ")";
        
        System.out.println(requete);
-    
+    System.out.println(texte[1]);
     return requete;
 }
     private boolean verifTexteExiste(String s){
@@ -131,6 +128,15 @@ INSERT INTO T_TITRE (TIT_CODE, TIT_LIBELLE)
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) { 
         // TODO add your handling code here:
         this.dispose();
+    }
+    private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)  { 
+        // TODO add your handling code here:
+        try{
+            createAddQuery();
+        }
+        catch (SQLException ex){
+            
+        }
     }
 
 }
