@@ -19,7 +19,7 @@ public class Controller {
     
     
     public MyModel model;
-    Connexion maConnexion;
+    public Connexion maConnexion;
  
     public Controller(String nameDatabase, String loginDatabase, String passwordDatabase) 
             throws SQLException, ClassNotFoundException {
