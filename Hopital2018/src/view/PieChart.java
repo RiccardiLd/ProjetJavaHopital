@@ -69,20 +69,4 @@ public class PieChart extends JFrame {
         return chart;
 
     }
-    
-    /*
-    public static void main(String[] args) {
-        PieChart demo = new PieChart("Comparison", "Which operating system are you using?");
-        demo.pack();
-        demo.setVisible(true);
-        demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        BarChart chart = new BarChart("Test Bar", "Tu pense qu'on peux mettre de jolies couleurs?");
-        chart.pack( );        
-        RefineryUtilities.centerFrameOnScreen( chart );        
-        chart.setVisible( true ); 
-        chart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    
-    */
 }

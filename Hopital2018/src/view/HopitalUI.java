@@ -4,11 +4,13 @@ package view;
  *  (C) Copyright Gianni Riccardi.
  */
 
+import javax.swing.JFrame;
 import controller.Controller;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.*;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
@@ -25,7 +27,7 @@ public class HopitalUI extends javax.swing.JFrame {
         initComponents();
         
         Connexion maConnexion;
-        maConnexion = new Connexion("hopital","root","root");
+        maConnexion = new Connexion("hopital","root","");
         controleur = new Controller(maConnexion);
     }
 
@@ -173,8 +175,20 @@ public class HopitalUI extends javax.swing.JFrame {
                 new HopitalUI().setVisible(true);
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
         });
+        
+        PieChart demo = new PieChart("" , "Which operating system are you using?");
+        demo.pack();
+        demo.setVisible(true);
+        demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        BarChart chart = new BarChart("Test Bar", "Tu pense qu'on peux mettre de jolies couleurs?");
+        chart.pack( );        
+        RefineryUtilities.centerFrameOnScreen( chart );        
+        chart.setVisible( true ); 
+        chart.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
     }
 
     private final Controller controleur;

@@ -61,7 +61,7 @@ public class BarChart extends JFrame{
 
       dataset.addValue( 4.0 , vert , c1 );        
       dataset.addValue( 2.0 , vert , c3 );        
-      dataset.addValue( 3.0 , vert , c2 );                   
+      dataset.addValue( 3.0 , vert , c2 );  
 
       return dataset; 
    }
