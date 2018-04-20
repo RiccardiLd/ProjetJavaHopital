@@ -19,12 +19,18 @@ public class Controller {
     
     
     public MyModel model;
+    public Connexion maConnexion;
  
-    public Controller(Connexion maConnexion) throws SQLException {
-        init(maConnexion);
+    public Controller(String nameDatabase, String loginDatabase, String passwordDatabase) 
+            throws SQLException, ClassNotFoundException {
+        maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase);
     }
     
-    private void init(Connexion maConnexion) throws SQLException {
+    public void findAll(String table) throws SQLException{
+        maConnexion.findAll(table);
+    }
+    
+    public void updateModel() throws SQLException {
         model = new MyModel();
         model.addRow();
      
