@@ -1,6 +1,6 @@
 /*  Created by riccardild on Apr 20, 2018 3:54:55 PM
- *  (C) Copyright Gianni Riccardi.
- */
+*  (C) Copyright Gianni Riccardi.
+*/
 package view;
 
 import javax.swing.JFrame;
@@ -48,11 +48,11 @@ public class SecondFrame extends JFrame{
             jButtonCancelActionPerformed(evt);
         });
         
-
         
-                
-
-         for(int i = 1; i <= nbColonnes; i++)
+        
+        
+        
+        for(int i = 1; i <= nbColonnes; i++)
         {
             label[i-1] = new javax.swing.JLabel(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
             texte[i-1] = new javax.swing.JTextField();
@@ -63,7 +63,7 @@ public class SecondFrame extends JFrame{
         fieldPane.setLayout(new BoxLayout(fieldPane, BoxLayout.PAGE_AXIS));
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.add(jButtonOk);
-        buttonPane.add(jButtonCancel); 
+        buttonPane.add(jButtonCancel);
         pane.add(fieldPane);
         pane.add(buttonPane);
         pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
@@ -77,59 +77,80 @@ public class SecondFrame extends JFrame{
     
     
     
-
-     private String createAddQuery() throws SQLException
-{
-    /*
-INSERT INTO T_TITRE (TIT_CODE, TIT_LIBELLE)
-       VALUES  ('M.'    , 'Monsieur'),
-                ('Mlle.' , 'Mademoiselle'),
-                ('Mme.'  , 'Madame');*/
     
-       String requete = "INSERT INTO " + controleur.maConnexion.rsetMeta.getTableName(1) + " (";
-       /*for(int i =0; i<nbColonnes; i++)
-       {
-          //if(verifTexteExiste(label[i].getText().trim()))
-          // {
-           requete += label[i].getText().trim();
-           if(nbColonnes>i+1)
-           requete += ", ";
-           //}
-       }*/
-       /*
-       requete += ") VALUES ( ";
+    private String createAddQuery() throws SQLException
+    {
         
-       for(int i =0; i<nbColonnes; i++)
-       {
-           if(verifTexteExiste(texte[i].getText().trim()))
-           {
-            requete += texte[i].getText().trim();
-           if(nbColonnes>i+1)
-           requete += ", ";
-           }
-           
-       }*/
-       requete += ")";
-       
-       System.out.println(requete);
-    System.out.println(texte[1]);
-    return requete;
-}
-    private boolean verifTexteExiste(String s){
+        int j=0;
+        int cpt=0;
+        String requete = "INSERT INTO " + controleur.maConnexion.rsetMeta.getTableName(1) + " (";
         
-        if(s!= null && s!= "")
-            return true;
+        for(int i =0; i<nbColonnes; i++)
+        {
+            if(!texte[i].getText().trim().equals(""))
+            {
+                cpt++;
+                
+            }
+        }
+        if(cpt != 0)
+        {
+            for(int i =0; i<nbColonnes; i++)
+            {
+                if(!texte[i].getText().trim().equals(""))
+                {
+                    requete += label[i].getText().trim();
+                    j+=1;
+                    
+                    if(j!=0 && j!=cpt)
+                    {
+                        requete += ", ";
+                        
+                    }
+                    
+                    
+                }
+            }
+            j=0;
+            requete += ") VALUES (";
+            
+            for(int i =0; i<nbColonnes; i++)
+            {
+                if(!texte[i].getText().trim().equals(""))
+                {
+                    requete += texte[i].getText().trim();
+                    j+=1;
+                    
+                    if(j!=0 && j!=cpt)
+                    {
+                        requete += ", ";
+                        
+                    }
+                    
+                    
+                }
+            }
+            requete += ")";
+            
+            System.out.println(requete);
+            //System.out.println(verifTexteExiste(label[1].getText().trim())+"1");
+            return requete;
+        }
         
         
-        return false;
+        
+        return "false";
+        
+        
     }
-        
-
-    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) { 
+    
+    
+    
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         this.dispose();
     }
-    private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)  { 
+    private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)  {
         // TODO add your handling code here:
         try{
             createAddQuery();
@@ -138,6 +159,5 @@ INSERT INTO T_TITRE (TIT_CODE, TIT_LIBELLE)
             
         }
     }
-
+    
 }
-   
