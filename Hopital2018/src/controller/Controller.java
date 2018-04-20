@@ -50,19 +50,13 @@ public class Controller {
             
           for(int i = 1; i <= maConnexion.rsetMeta.getColumnCount(); i++)
         {
-             
-             
             System.out.print("\t" + maConnexion.rset.getObject(i).toString() + "\t |");
             model.setValueAt(maConnexion.rset.getObject(i).toString(),j,i-1);
-           
         }
 
         System.out.println("\n---------------------------------");
-        
             j++;
       }
-            
-        
     }
     
     private class RowData{

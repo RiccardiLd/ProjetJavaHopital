@@ -90,7 +90,6 @@ public class SecondFrame extends JFrame{
             if(!texte[i].getText().trim().equals(""))
             {
                 cpt++;
-                
             }
         }
         if(cpt != 0)
@@ -105,10 +104,7 @@ public class SecondFrame extends JFrame{
                     if(j!=0 && j!=cpt)
                     {
                         requete += ", ";
-                        
                     }
-                    
-                    
                 }
             }
             j=0;
@@ -124,10 +120,7 @@ public class SecondFrame extends JFrame{
                     if(j!=0 && j!=cpt)
                     {
                         requete += ", ";
-                        
                     }
-                    
-                    
                 }
             }
             requete += ")";
@@ -136,12 +129,7 @@ public class SecondFrame extends JFrame{
             //System.out.println(verifTexteExiste(label[1].getText().trim())+"1");
             return requete;
         }
-        
-        
-        
-        return "false";
-        
-        
+        return "";
     }
     
     
