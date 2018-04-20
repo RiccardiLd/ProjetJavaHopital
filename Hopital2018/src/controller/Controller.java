@@ -20,7 +20,10 @@ public class Controller {
     
     public MyModel model;
  
-    public Controller(Connexion maConnexion) throws SQLException {
+    public Controller(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
+        Connexion maConnexion;
+        //maConnexion = new Connexion("hopital","root","root");
+        maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase);
         init(maConnexion);
     }
     
