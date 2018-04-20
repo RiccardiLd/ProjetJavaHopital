@@ -34,7 +34,13 @@ public class SecondFrame extends JFrame{
         JPanel fieldPane = new JPanel();
         
         javax.swing.JButton jButtonOk = new javax.swing.JButton("Ok");
+        jButtonOk.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jButtonOkActionPerformed(evt);
+        });
         javax.swing.JButton jButtonCancel = new javax.swing.JButton("Cancel");
+        jButtonCancel.addActionListener((java.awt.event.ActionEvent evt) -> {
+            jButtonCancelActionPerformed(evt);
+        });
         
         javax.swing.JTextField[] texte = new javax.swing.JTextField[nbColonnes];
         javax.swing.JLabel[] label = new javax.swing.JLabel[nbColonnes];
@@ -60,4 +66,12 @@ public class SecondFrame extends JFrame{
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
+    
+    private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt) { 
+        // TODO add your handling code here:
+    }
+    
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) { 
+        // TODO add your handling code here:
+    }
 }
