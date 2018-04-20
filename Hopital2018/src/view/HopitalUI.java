@@ -124,9 +124,45 @@ public class HopitalUI extends javax.swing.JFrame {
 
     private void hopitalTreeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopitalTreeMouseReleased
         // TODO add your handling code here:
+        String path = hopitalTree.getClosestPathForLocation(evt.getX(), evt.getY()).toString();
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
+            String table = "N/A";
+            if (path.contains("Service")) {
+                table = "service";
+            }
+            if (path.contains("Chambre")) {
+                table = "chambre";
+            }
+            if (path.contains("Employé")) {
+                table = "employe";
+            }
+            if (path.contains("Docteur")) {
+                table = "docteur";
+            }
+            if (path.contains("Infirmier")) {
+                table = "infirmier";
+            }
+            if (path.contains("Malade")) {
+                table = "malade";
+            }
+            if (path.contains("Hospitalisation")) {
+                table = "hospitalisation";
+            }
+            if (path.contains("Soigne")) {
+                table = "soigne";
+            }
+            if (!table.contains("N/A")) {
+                try {
+                    controleur.findAll(table);
+                    controleur.init();
+                    jTable1.setModel(controleur.model);
+                } catch (SQLException ex) {
+                    Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
             jPopupMenuTree.removeAll();
-            String path = hopitalTree.getClosestPathForLocation(evt.getX(), evt.getY()).toString();
             javax.swing.JMenuItem item1 = new javax.swing.JMenuItem("Add " + path);
             javax.swing.JMenuItem item2 = new javax.swing.JMenuItem("Remove " + path);
             javax.swing.JMenuItem item3 = new javax.swing.JMenuItem("Find by... ");
@@ -134,7 +170,6 @@ public class HopitalUI extends javax.swing.JFrame {
             jPopupMenuTree.add(item2);
             jPopupMenuTree.add(item3);
             jPopupMenuTree.show(hopitalTree.getComponentAt(evt.getX(), evt.getY()), evt.getX(), evt.getY());
-            jTable1.setModel(controleur.model);
         }
     }//GEN-LAST:event_hopitalTreeMouseReleased
 

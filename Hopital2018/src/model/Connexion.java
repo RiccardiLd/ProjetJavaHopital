@@ -55,12 +55,13 @@ public class Connexion {
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
         //System.out.print(" "+urlDatabase +" " + loginDatabase + " " +passwordDatabase );
         stmt = conn.createStatement();
-        rset = stmt.executeQuery("select * from " + "docteur");
-        // création d'un ordre SQL (statement)
-        
-        
+        //rset = stmt.executeQuery("select * from " + "docteur");
+    }
+    
+    public void findAll(String table) throws SQLException {
+        rset = stmt.executeQuery("select * from " + table);
+         // création d'un ordre SQL (statement)
         rsetMeta = rset.getMetaData();
-
     }
 
     /**
