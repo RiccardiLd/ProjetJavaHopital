@@ -240,8 +240,8 @@ public class SecondFrame extends JFrame{
         int j=0;
         int cpt=0;
         String requete = "UPDATE " + controleur.maConnexion.rsetMeta.getTableName(1) + " SET ";
-        
-        for(int i =0; i<nbColonnes; i++)
+        System.out.println("LOL");
+        for(int i =1; i<nbColonnes; i++)
         {
             if(!texte[i].getText().trim().equals(""))
             {
@@ -251,7 +251,7 @@ public class SecondFrame extends JFrame{
         }
         if(cpt != 0)
         {
-            for(int i =0; i<nbColonnes; i++)
+            for(int i =1; i<nbColonnes; i++)
             {
                 if(!texte[i].getText().trim().equals(""))
                 {
@@ -273,7 +273,10 @@ public class SecondFrame extends JFrame{
             }
             
             //System.out.println(requete);
-            
+            requete += " WHERE ";
+            requete += controleur.maConnexion.rsetMeta.getColumnName(1);
+            requete += " = ";
+            requete += texte[0].getText().trim();
             return requete;
         }
         
@@ -282,6 +285,7 @@ public class SecondFrame extends JFrame{
         
         
     }
+    
     
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -297,8 +301,10 @@ public class SecondFrame extends JFrame{
                 query = createDeleteQuery();
             if(frameName.equals("Find"))
                 query = createFindQuery();
+            if(frameName.equals("Update"))
+                query = createUpdateQuery();
             
-            if((frameName.equals("Add")||frameName.equals("Delete")) && !query.equals("")) {
+            if((frameName.equals("Add")||frameName.equals("Delete")||frameName.equals("Update")) && !query.equals("")) {
                 controleur.queryUpdate(query);
             }
             else if(frameName.equals("Find") && !query.equals("")) {
