@@ -319,9 +319,9 @@ public class HopitalUI extends javax.swing.JFrame {
                 operationalSystem[0]);
         
         if (OSChoix.equals("MacOS")) 
-            host = "8889";
+            host = ":8889";
         else if (OSChoix.equals("Windows"))
-            host = "8888";
+            host = "";
         
         
         int option = javax.swing.JOptionPane.showConfirmDialog(null,
