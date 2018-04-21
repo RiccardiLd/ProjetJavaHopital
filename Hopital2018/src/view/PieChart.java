@@ -54,10 +54,18 @@ public class PieChart extends JFrame {
     public void PieChambre(Controller controleur) throws SQLException
     {
         controleur.maConnexion.query("SELECT nb_lits, COUNT(no_chambre) FROM `chambre` GROUP BY nb_lits");
-        for(int i = 1; i <= controleur.maConnexion.rset.getFetchSize(); i++)
+        /*for(int i = 1; i <= controleur.maConnexion.rset.getFetchSize(); i++)
         {
             System.out.println(controleur.maConnexion.rset.getInt(i));
             
+        }*/
+        
+        while(controleur.maConnexion.rset.next()){
+          
+            for(int i = 1; i <= controleur.maConnexion.rsetMeta.getColumnCount(); i++)
+            {
+                System.out.print("\t" + controleur.maConnexion.rset.getObject(i).toString() + "\t |");
+            }
         }
     }
     
