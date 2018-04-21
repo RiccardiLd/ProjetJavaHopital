@@ -155,8 +155,8 @@ public class HopitalUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            BarChart chart = new BarChart(controleur.maConnexion);
-            chart.affBarChart();
+            //BarChart chart = new BarChart(controleur.maConnexion);
+            //chart.affBarChart();
             PieChart demo = new PieChart();
             demo.PieChambre(controleur);
             demo.affPieChart();

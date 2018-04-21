@@ -5,6 +5,7 @@ package view;
 
 import controller.Controller;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -13,18 +14,21 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.data.general.DefaultKeyedValuesDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 
 /**
  *
- * @author riccardild
+ * @author Marie
  */
 public class PieChart extends JFrame {
 
     private static final long serialVersionUID = 1L;
     PieDataset dataset;
+    ArrayList title = new ArrayList();
+    ArrayList value = new ArrayList();
 
     public PieChart(String applicationTitle, String chartTitle) {
         super(applicationTitle);
@@ -54,37 +58,45 @@ public class PieChart extends JFrame {
     public void PieChambre(Controller controleur) throws SQLException
     {
         controleur.maConnexion.query("SELECT nb_lits, COUNT(no_chambre) FROM `chambre` GROUP BY nb_lits");
-        /*for(int i = 1; i <= controleur.maConnexion.rset.getFetchSize(); i++)
-        {
-            System.out.println(controleur.maConnexion.rset.getInt(i));
-            
-        }*/
         
         while(controleur.maConnexion.rset.next()){
           
-            for(int i = 1; i <= controleur.maConnexion.rsetMeta.getColumnCount(); i++)
+            for(int i = 1; i <= controleur.maConnexion.rsetMeta.getColumnCount(); i+=2)
             {
-                System.out.print("\t" + controleur.maConnexion.rset.getObject(i).toString() + "\t |");
+                //System.out.print("\t" + controleur.maConnexion.rset.getObject(i).toString() + "\t |");
+                title.add(controleur.maConnexion.rset.getObject(i).toString());
+                value.add(controleur.maConnexion.rset.getObject(i+1).toString());
             }
         }
     }
     
     
-    public void modifDataset(String value, int nb)
-    {
-       //dataset = createDataset();
-       //dataset.setValue(value, nb); 
-       //dataset.setValue("Linux", 29);
-    }
+   
     /**
      * Creates a sample dataset
      */
     private  PieDataset createDataset() {
-        DefaultPieDataset result = new DefaultPieDataset();
-        result.setValue("Linux", 29);
-        result.setValue("Mac", 21);
-        //result.setValue("Windows", 49);
-        //result.setValue("Other", 1);
+        DefaultPieDataset result = new DefaultPieDataset(); 
+        String titre = new String();
+        int valeur;
+        for (int i=1; i<5;i++)
+        {
+            result.setValue("Text"+i, i);
+            
+        } 
+        //result.setValue("Linux", 29);
+        //result.setValue("Mac", 21);
+        
+        /*
+        for(int i = 0; i < title.size(); i++)
+        {
+            titre = (String)title.get(i);
+            valeur= (int)value.get(i);
+            System.out.print(titre+ " : "+ valeur+ "\t |");
+            result.setValue(titre, valeur);
+            //result.setValue(title.get(i), value.get(i));
+        }  */
+        
         return result;
 
     }
@@ -112,6 +124,14 @@ public class PieChart extends JFrame {
     
     public void affPieChart()
     {
+        /*
+        for(int i = 0; i < title.size(); i++)
+        {
+            System.out.print("\t Le nb de lit: " + title.get(i) + "\t |");
+            System.out.print("\t Le nb de chambre: " + value.get(i) + "\t |");
+        }  */
+        
+       
         this.pack();
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
