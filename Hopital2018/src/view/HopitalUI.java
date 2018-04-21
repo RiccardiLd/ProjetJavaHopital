@@ -157,7 +157,8 @@ public class HopitalUI extends javax.swing.JFrame {
             // TODO add your handling code here:
             BarChart chart = new BarChart(controleur.maConnexion);
             chart.affBarChart();
-            PieChart demo = new PieChart("nn", "Which operating system are you using?");
+            PieChart demo = new PieChart();
+            demo.PieChambre(controleur);
             demo.affPieChart();
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
