@@ -20,10 +20,11 @@ public class SecondFrame extends JFrame{
     int nbColonnes;
     javax.swing.JTextField[] texte;
     javax.swing.JLabel[] label;
+    String frameName;
     
-    
-    public SecondFrame(Controller controleur, String frameName) throws SQLException {
-        super(frameName);
+    public SecondFrame(Controller controleur, String frameNamex) throws SQLException {
+        super(frameNamex);
+        frameName = frameNamex;
         this.controleur = controleur;
         nbColonnes = controleur.maConnexion.rsetMeta.getColumnCount();
         texte = new javax.swing.JTextField[nbColonnes];
@@ -78,7 +79,14 @@ public class SecondFrame extends JFrame{
         int j=0;
         int cpt=0;
         String requete = "INSERT INTO " + controleur.maConnexion.rsetMeta.getTableName(1) + " (";
-        
+        /*for(int i = 1; i <= nbColonnes; i++)
+        {
+        label[i-1] = new javax.swing.JLabel(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
+        texte[i-1] = new javax.swing.JTextField();
+        texte[i-1].setPreferredSize(new Dimension(200,25));
+        fieldPane.add(label[i-1]);
+        fieldPane.add(texte[i-1]);
+        }*/
         for(int i =0; i<nbColonnes; i++)
         {
             if(!texte[i].getText().trim().equals(""))
@@ -92,7 +100,9 @@ public class SecondFrame extends JFrame{
             {
                 if(!texte[i].getText().trim().equals(""))
                 {
-                    requete += label[i].getText().trim();
+                    
+                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
+                    
                     j+=1;
                     
                     if(j!=0 && j!=cpt)
@@ -108,7 +118,9 @@ public class SecondFrame extends JFrame{
             {
                 if(!texte[i].getText().trim().equals(""))
                 {
+                    requete += "'";
                     requete += texte[i].getText().trim();
+                    requete += "'";
                     j+=1;
                     
                     if(j!=0 && j!=cpt)
@@ -145,14 +157,16 @@ public class SecondFrame extends JFrame{
             {
                 if(!texte[i].getText().trim().equals(""))
                 {
-                    requete += label[i].getText().trim();
-                    requete += "= ";
+                    
+                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
+                    requete += " = '";
                     requete += texte[i].getText().trim();
+                    requete += "'";
                     j+=1;
                     
                     if(j!=0 && j!=cpt)
                     {
-                        requete += "and ";
+                        requete += " and ";
                         
                     }
                     
@@ -160,14 +174,114 @@ public class SecondFrame extends JFrame{
                 }
             }
             
-            System.out.println(requete);
-
+            //System.out.println(requete);
+            
+            return requete;
+        }
+        
+        return "";
+        
+        
+        
+    }
+    
+    
+    private String createFindQuery() throws SQLException
+    {
+        
+        int j=0;
+        int cpt=0;
+        String requete = "SELECT * FROM " + controleur.maConnexion.rsetMeta.getTableName(1) + " WHERE ";
+        
+        for(int i =0; i<nbColonnes; i++)
+        {
+            if(!texte[i].getText().trim().equals(""))
+            {
+                cpt++;
+                
+            }
+        }
+        if(cpt != 0)
+        {
+            for(int i =0; i<nbColonnes; i++)
+            {
+                if(!texte[i].getText().trim().equals(""))
+                {
+                    
+                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
+                    requete += " = '";
+                    requete += texte[i].getText().trim();
+                    requete += "'";
+                    j+=1;
+                    
+                    if(j!=0 && j!=cpt)
+                    {
+                        requete += " and ";
+                        
+                    }
+                    
+                    
+                }
+            }
+            
+            //System.out.println(requete);
+            
             return requete;
         }
         
         return "";
     }
     
+    private String createUpdateQuery() throws SQLException
+    {
+        /*UPDATE table
+        SET nom_colonne_1 = 'nouvelle valeur'
+        WHERE condition*/
+        int j=0;
+        int cpt=0;
+        String requete = "UPDATE " + controleur.maConnexion.rsetMeta.getTableName(1) + " SET ";
+        
+        for(int i =0; i<nbColonnes; i++)
+        {
+            if(!texte[i].getText().trim().equals(""))
+            {
+                cpt++;
+                
+            }
+        }
+        if(cpt != 0)
+        {
+            for(int i =0; i<nbColonnes; i++)
+            {
+                if(!texte[i].getText().trim().equals(""))
+                {
+                    
+                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
+                    requete += " = '";
+                    requete += texte[i].getText().trim();
+                    requete += "'";
+                    j+=1;
+                    
+                    if(j!=0 && j!=cpt)
+                    {
+                        requete += " and ";
+                        
+                    }
+                    
+                    
+                }
+            }
+            
+            //System.out.println(requete);
+            
+            return requete;
+        }
+        
+        return "";
+        
+        
+        
+    }
     
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -175,11 +289,21 @@ public class SecondFrame extends JFrame{
     }
     private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)  {
         // TODO add your handling code here:
+        String query = "";
         try{
-            String query = createAddQuery();
-            if(!query.equals("")) {
-                System.out.println(query);
+            if(frameName.equals("Add"))
+                query = createAddQuery();
+            if(frameName.equals("Delete"))
+                query = createDeleteQuery();
+            if(frameName.equals("Find"))
+                query = createFindQuery();
+            
+            if((frameName.equals("Add")||frameName.equals("Delete")) && !query.equals("")) {
+                controleur.queryUpdate(query);
+            }
+            else if(frameName.equals("Find") && !query.equals("")) {
                 controleur.query(query);
+                
             }
             else System.out.println("\nErreur requete vide.");
         }
