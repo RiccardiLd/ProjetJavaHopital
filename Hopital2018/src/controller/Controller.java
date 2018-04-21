@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import model.*;
 
 /**
@@ -24,6 +25,7 @@ public class Controller {
     public Controller(String nameDatabase, String loginDatabase, String passwordDatabase)
             throws SQLException, ClassNotFoundException {
         maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase);
+        model = new MyModel();
     }
     
     public void findAll(String table) throws SQLException{
