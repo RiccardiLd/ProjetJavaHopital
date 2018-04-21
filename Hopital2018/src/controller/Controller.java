@@ -32,6 +32,8 @@ public class Controller {
     
     public void query(String query) throws SQLException {
         maConnexion.query(query);
+        
+        updateModel(); ///A VERIFIER 
     }
     public void queryUpdate(String query) throws SQLException {
         maConnexion.queryUpdate(query);

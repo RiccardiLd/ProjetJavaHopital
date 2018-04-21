@@ -68,9 +68,10 @@ public class Connexion {
         rset = stmt.executeQuery(query);
          // création d'un ordre SQL (statement)
         rsetMeta = rset.getMetaData();
+        
     }
      public void queryUpdate(String query) throws SQLException {
-         System.out.println(query + "ok") ;
+       System.out.println(query + "ok") ;
        stmt = conn.createStatement();
        stmt.executeUpdate(query);
          // création d'un ordre SQL (statement)
