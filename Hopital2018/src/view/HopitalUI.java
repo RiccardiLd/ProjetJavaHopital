@@ -284,36 +284,85 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
-     * @param args the command line arguments
+     * Code se declenchera automatiquement avant le main à chaque fois.
+     * Demande à l'utilisateur de rentrer ses informations pour accéder à la base.
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-        */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HopitalUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    static
+    {
+        javax.swing.Icon icon = new javax.swing.ImageIcon("Img/Hospital_Icon.png");
+        javax.swing.JTextField username = new javax.swing.JTextField();
+        javax.swing.JTextField password = new javax.swing.JPasswordField();
+        username.setColumns(20);
+        password.setColumns(20);
         
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            try {
-                new HopitalUI().setVisible(true);
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        Object[] message = {
+            "Username:", username,
+            "Password:", password
+        };
+        String[] operationalSystem = { "MacOS", "Windows" };
+        
+        String OSChoix = (String) javax.swing.JOptionPane.showInputDialog(null,
+                "Système operationnel :",
+                "Choix de l'OS",
+                javax.swing.JOptionPane.QUESTION_MESSAGE,
+                null,
+                operationalSystem,
+                operationalSystem[0]);
+        
+        if (OSChoix.equals("MacOS")) 
+            host = "8889";
+        else if (OSChoix.equals("Windows"))
+            host = "8888";
+        
+        
+        int option = javax.swing.JOptionPane.showConfirmDialog(null,
+                message, 
+                "Login - Hôpital", 
+                javax.swing.JOptionPane.OK_CANCEL_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE,
+                icon);
+        
+        if (option == javax.swing.JOptionPane.OK_OPTION) {
+            loginDatabase = username.getText();
+            passwordDatabase = password.getText();
+        }
+        else System.exit(0);
     }
+        
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String args[]) {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+            */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(HopitalUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            //</editor-fold>
+            
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(() -> {
+                try {
+                    new HopitalUI().setVisible(true);
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        }
     
+    private static String passwordDatabase;
+    private static String loginDatabase;
+    private static String host;
     private final Controller controleur;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree hopitalTree;
