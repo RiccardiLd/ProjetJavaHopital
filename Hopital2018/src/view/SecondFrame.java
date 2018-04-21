@@ -160,18 +160,12 @@ public class SecondFrame extends JFrame{
                 }
             }
             
-            
-            
-            
             System.out.println(requete);
 
             return requete;
         }
         
         return "";
-                
-        
-        
     }
     
     
@@ -188,11 +182,10 @@ public class SecondFrame extends JFrame{
                 controleur.query(query);
             }
             else System.out.println("\nErreur requete vide.");
-            this.dispose();
         }
         catch (SQLException ex){
             
         }
+        this.dispose();
     }
-    
 }
