@@ -286,6 +286,154 @@ public class SecondFrame extends JFrame{
         
     }
     
+    private String createAvanceDocteurQuery() throws SQLException
+    {
+        /**
+         * INFORMATIONS D'UN MALADE
+         * Préselectionner la table malades
+         * Donne des infos sur malade : Chambre, Les docteurs, leurs noms etc 
+         */
+        System.out.println("ICI");
+        int j=0;
+        int cpt=0;
+        String requete = "SELECT * FROM malade m, soigne s, hospitalisation h, docteur d, employe e WHERE ";/*, chambre c, docteur d, employe e WHERE ";*/
+        for(int i =0; i<nbColonnes; i++)
+        {
+            if(!texte[i].getText().trim().equals(""))
+            {
+                cpt++;
+                
+            }
+        }
+        
+        if(cpt != 0)
+        {
+            for(int i =0; i<nbColonnes; i++)
+            {
+                if(!texte[i].getText().trim().equals(""))
+                {
+                    requete += "m.";
+                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
+                    requete += " = '";
+                    requete += texte[i].getText().trim();
+                    requete += "'";
+                    
+                    
+                    if(j!=0 && j!=cpt)
+                    {
+                        requete += " and ";
+                        
+                    }
+                    j+=1;
+                }
+            }
+            requete += "and m.numero = s.no_malade and s.no_malade = h.no_malade and s.no_docteur = d.numero and s.no_docteur = e.numero";
+            System.out.println(requete);
+            return requete;
+        }
+        
+        return "";
+    }
+    
+    private String createAvanceChambreQuery() throws SQLException
+    {
+        /**
+         * INFORMATIONS D'UNE CHAMBRE
+         * Préselectionner la table chambre
+         * Donne des infos sur chambre : surveillants, Les malades
+         */
+        
+        int j=0;
+        int cpt=0;
+        String requete = "SELECT * FROM chambre c, infirmier i, hospitalisation h, malade m, employe e WHERE ";/*, chambre c, docteur d, employe e WHERE ";*/
+        for(int i =0; i<nbColonnes; i++)
+        {
+            if(!texte[i].getText().trim().equals(""))
+            {
+                cpt++;
+                
+            }
+        }
+        
+        if(cpt != 0)
+        {
+            for(int i =0; i<nbColonnes; i++)
+            {
+                if(!texte[i].getText().trim().equals(""))
+                {
+                    requete += "c.";
+                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
+                    requete += " = '";
+                    requete += texte[i].getText().trim();
+                    requete += "'";
+                    
+                    
+                    if(j!=0 && j!=cpt)
+                    {
+                        requete += " and ";
+                        
+                    }
+                    j+=1;
+                }
+            }
+            requete += "and c.no_chambre = h.no_chambre and m.numero = h.no_malade and c.surveillant = e.numero and i.numero = c.surveillant";
+            System.out.println(requete);
+            return requete;
+        }
+        
+        return "";
+    }
+    
+    private String createAvanceQuery() throws SQLException
+    {
+        /**
+         * INFORMATIONS D'UNE CHAMBRE
+         * Préselectionner la table chambre
+         * Donne des infos sur chambre : surveillants, Les malades
+         */
+        
+        /*int j=0;
+        int cpt=0;
+        String requete = "SELECT * FROM chambre c, infirmier i, hospitalisation h, malade m, employe e WHERE ";
+        for(int i =0; i<nbColonnes; i++)
+        {
+            if(!texte[i].getText().trim().equals(""))
+            {
+                cpt++;
+                
+            }
+        }
+        
+        if(cpt != 0)
+        {
+            for(int i =0; i<nbColonnes; i++)
+            {
+                if(!texte[i].getText().trim().equals(""))
+                {
+                    requete += "c.";
+                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
+                    requete += " = '";
+                    requete += texte[i].getText().trim();
+                    requete += "'";
+                    
+                    
+                    if(j!=0 && j!=cpt)
+                    {
+                        requete += " and ";
+                        
+                    }
+                    j+=1;
+                }
+            }
+            requete += "and c.no_chambre = h.no_chambre and m.numero = h.no_malade and c.surveillant = e.numero and i.numero = c.surveillant";
+            System.out.println(requete);
+            return requete;
+        }
+        */
+        return "";
+    }
+    
+    
     
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -297,18 +445,20 @@ public class SecondFrame extends JFrame{
         try{
             if(frameName.equals("Add"))
                 query = createAddQuery();
-            if(frameName.equals("Delete"))
+            else if(frameName.equals("Delete"))
                 query = createDeleteQuery();
-            if(frameName.equals("Find"))
+            else if(frameName.equals("Find"))
                 query = createFindQuery();
-            if(frameName.equals("Update"))
+            else if(frameName.equals("Update"))
                 query = createUpdateQuery();
+            else if(frameName.equals("Avance"))
+                query = createAvanceQuery();
             
             if((frameName.equals("Add")||frameName.equals("Delete")||frameName.equals("Update")) && !query.equals("")) {
                 controleur.queryUpdate(query);
             }
-            else if(frameName.equals("Find") && !query.equals("")) {
-                controleur.query(query);
+            else if((frameName.equals("Find")||frameName.equals("Avance")) && !query.equals("")) {
+                controleur.query(query);///Attention ICI au equals Avance
                 
             }
             else System.out.println("\nErreur requete vide.");
