@@ -8,6 +8,7 @@ import controller.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -430,6 +431,11 @@ public class HopitalUI extends javax.swing.JFrame {
                     new HopitalUI().setVisible(true);
                 } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null,
+                        "Wrong username and/or password - access denied.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                    System.exit(1);
                 }
             });
         }

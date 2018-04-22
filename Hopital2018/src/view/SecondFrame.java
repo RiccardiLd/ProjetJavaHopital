@@ -8,6 +8,7 @@ import controller.*;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -26,7 +27,7 @@ public class SecondFrame extends JFrame{
      * Constructeur de la SecondFrame
      * @param controleur le controleur principal du projet
      * @param frameName le nom de la fênetre, qui décidera aussi de sa fonction
-     * @throws SQLException 
+     * @throws SQLException
      */
     public SecondFrame(Controller controleur, String frameName) throws SQLException {
         super(frameName);
@@ -41,7 +42,7 @@ public class SecondFrame extends JFrame{
     }
     /**
      * Méthode appelée depuis le constructeur pour initialiser la SecondFrame
-     * @throws SQLException 
+     * @throws SQLException
      */
     private void init() throws SQLException {
         JPanel pane = new JPanel();
@@ -80,14 +81,14 @@ public class SecondFrame extends JFrame{
     }
     /**
      * Bouton "Cancel" appuyé
-     * @param evt 
+     * @param evt
      */
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {
         this.dispose();
     }
     /**
      * Bouton "Ok" appuyé
-     * @param evt 
+     * @param evt
      */
     private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)  {
         String query = "";
@@ -114,12 +115,18 @@ public class SecondFrame extends JFrame{
             
             if((frameName.equals("Add")||frameName.equals("Delete")||frameName.equals("Update")) && !query.equals("")) {
                 controleur.queryUpdate(query);
+                JOptionPane.showMessageDialog(this,
+                    "Requête réalisée : " + query);
             }
             else if((frameName.equals("Find")||frameName.equals("Avance")) && !query.equals("")) {
                 controleur.query(query);///Attention ICI au equals Avance
-                
+                JOptionPane.showMessageDialog(this,
+                    "Requête réalisée : " + query);
             }
-            else System.out.println("\nErreur requete vide.");
+            else JOptionPane.showMessageDialog(this,
+                    "Erreur requête vide",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
         catch (SQLException ex){
             
