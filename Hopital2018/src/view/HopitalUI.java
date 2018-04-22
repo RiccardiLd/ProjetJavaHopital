@@ -155,6 +155,11 @@ public class HopitalUI extends javax.swing.JFrame {
         jMenuChart.setText("New chart...");
 
         jMenuItem1.setText("Chart 1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenuChart.add(jMenuItem1);
 
         jMenuItem2.setText("Chart 2");
@@ -365,6 +370,18 @@ public class HopitalUI extends javax.swing.JFrame {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemFindActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            PieChart p = new PieChart(controleur);
+            //p.PieChambre(controleur);
+            p.affPieChart();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     /**
      * Code static qui se declenchera automatiquement avant le main à chaque fois.
