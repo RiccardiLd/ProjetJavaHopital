@@ -342,6 +342,55 @@ public class QueryGenerator {
         return "";
     }
     
+     public String createAdvancedServiceQuery(int nbColonnes, javax.swing.JTextField[] texte) 
+            throws SQLException
+    {
+        /**
+         * INFORMATIONS D'UNE CHAMBRE
+         * Préselectionner la table service
+         * Donne des infos sur chambre : les docteurs du service
+         */
+        
+       // int j=0;
+        //int cpt=0;
+      //  String requete = "SELECT * FROM service s, docteur d, employe e WHERE ";/*, chambre c, docteur d, employe e WHERE ";*/
+       /* for(int i =0; i<nbColonnes; i++)
+        {
+            if(!texte[i].getText().trim().equals(""))
+            {
+                cpt++;
+                
+            }
+        }
+        
+        if(cpt != 0)
+        {
+            for(int i =0; i<nbColonnes; i++)
+            {
+                if(!texte[i].getText().trim().equals(""))
+                {
+                    requete += "c.";
+                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
+                    requete += " = '";
+                    requete += texte[i].getText().trim();
+                    requete += "'";
+                    
+                    
+                    if(j!=0 && j!=cpt)
+                    {
+                        requete += " and ";
+                    }
+                    j+=1;
+                }
+            }
+            requete += "and s.code = h.no_chambre and m.numero = h.no_malade and c.surveillant = e.numero and i.numero = c.surveillant";
+            System.out.println(requete);
+            return requete;
+        }*/
+        
+        return "";
+    }
+    
     public String createAdvancedQuery(int nbColonnes, javax.swing.JTextField[] texte) 
             throws SQLException
     {
