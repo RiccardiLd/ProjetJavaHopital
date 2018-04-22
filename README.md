@@ -1,6 +1,11 @@
 # ProjetJavaHopital
 Projet Java ING3 2018 - Gestion d'un centre hospitalier
 
+Groupe : 
+    BELAMY MArie-Claire     TD3
+    MINIER Théo             TD3
+    RICCARDI Gianni         TD3
+
 Bibliographie
 
 - Oracle Java Documentation - The Java Tutorials
