@@ -54,9 +54,9 @@ public class HopitalUI extends javax.swing.JFrame {
         jMenuOptions = new javax.swing.JMenu();
         jMenuItemAdvSearch = new javax.swing.JMenuItem();
         jMenuChart = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItemChart1 = new javax.swing.JMenuItem();
+        jMenuItemChart2 = new javax.swing.JMenuItem();
+        jMenuItemChart3 = new javax.swing.JMenuItem();
         jMenuEdit = new javax.swing.JMenu();
         jMenuItemAdd = new javax.swing.JMenuItem();
         jMenuItemDelete = new javax.swing.JMenuItem();
@@ -154,19 +154,29 @@ public class HopitalUI extends javax.swing.JFrame {
 
         jMenuChart.setText("New chart...");
 
-        jMenuItem1.setText("Chart 1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemChart1.setText("Chart 1");
+        jMenuItemChart1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemChart1ActionPerformed(evt);
             }
         });
-        jMenuChart.add(jMenuItem1);
+        jMenuChart.add(jMenuItemChart1);
 
-        jMenuItem2.setText("Chart 2");
-        jMenuChart.add(jMenuItem2);
+        jMenuItemChart2.setText("Chart 2");
+        jMenuItemChart2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemChart2ActionPerformed(evt);
+            }
+        });
+        jMenuChart.add(jMenuItemChart2);
 
-        jMenuItem3.setText("Chart 3");
-        jMenuChart.add(jMenuItem3);
+        jMenuItemChart3.setText("Chart 3");
+        jMenuItemChart3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemChart3ActionPerformed(evt);
+            }
+        });
+        jMenuChart.add(jMenuItemChart3);
 
         jMenuOptions.add(jMenuChart);
 
@@ -435,7 +445,7 @@ public class HopitalUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemFindActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemChart1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart1ActionPerformed
         try {
             // TODO add your handling code here:
             PieChart p = new PieChart(controleur);
@@ -445,7 +455,15 @@ public class HopitalUI extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemChart1ActionPerformed
+
+    private void jMenuItemChart2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemChart2ActionPerformed
+
+    private void jMenuItemChart3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemChart3ActionPerformed
     
     /**
      * Code static qui se declenchera automatiquement avant le main à chaque fois.
@@ -544,11 +562,11 @@ public class HopitalUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuChart;
     private javax.swing.JMenu jMenuEdit;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemAdd;
     private javax.swing.JMenuItem jMenuItemAdvSearch;
+    private javax.swing.JMenuItem jMenuItemChart1;
+    private javax.swing.JMenuItem jMenuItemChart2;
+    private javax.swing.JMenuItem jMenuItemChart3;
     private javax.swing.JMenuItem jMenuItemDelete;
     private javax.swing.JMenuItem jMenuItemFind;
     private javax.swing.JMenuItem jMenuItemUpdateModel;
