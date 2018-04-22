@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import model.*;
 
 /**

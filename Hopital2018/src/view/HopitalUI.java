@@ -22,8 +22,11 @@ public class HopitalUI extends javax.swing.JFrame {
      */
     public HopitalUI() throws SQLException, ClassNotFoundException {
         initComponents();
-        controleur = new Controller("hopital", loginDatabase, passwordDatabase, host);
         //controleur = new Controller("hopital","root","root", ":8889");
+        controleur = new Controller("hopital", loginDatabase, passwordDatabase, host);
+        controleur.findAll("service");
+        controleur.updateModel();
+        jTable1.setModel(controleur.model);
     }
     
     /**

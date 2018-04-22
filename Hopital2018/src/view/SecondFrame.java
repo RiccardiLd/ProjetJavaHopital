@@ -68,10 +68,7 @@ public class SecondFrame extends JFrame{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-    
-    
-    
-    
+
     
     private String createAddQuery() throws SQLException
     {
