@@ -22,9 +22,9 @@ public class SecondFrame extends JFrame{
     javax.swing.JLabel[] label;
     String frameName;
     
-    public SecondFrame(Controller controleur, String frameNamex) throws SQLException {
-        super(frameNamex);
-        frameName = frameNamex;
+    public SecondFrame(Controller controleur, String frameName) throws SQLException {
+        super(frameName);
+        this.frameName = frameName;
         this.controleur = controleur;
         nbColonnes = controleur.maConnexion.rsetMeta.getColumnCount();
         texte = new javax.swing.JTextField[nbColonnes];
@@ -157,7 +157,6 @@ public class SecondFrame extends JFrame{
             {
                 if(!texte[i].getText().trim().equals(""))
                 {
-                    
                     requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
                     requete += " = '";
                     requete += texte[i].getText().trim();
@@ -169,12 +168,8 @@ public class SecondFrame extends JFrame{
                         requete += " and ";
                         
                     }
-                    
-                    
                 }
             }
-            
-            //System.out.println(requete);
             
             return requete;
         }
@@ -198,7 +193,6 @@ public class SecondFrame extends JFrame{
             if(!texte[i].getText().trim().equals(""))
             {
                 cpt++;
-                
             }
         }
         if(cpt != 0)
@@ -207,7 +201,6 @@ public class SecondFrame extends JFrame{
             {
                 if(!texte[i].getText().trim().equals(""))
                 {
-                    
                     requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
                     requete += " = '";
                     requete += texte[i].getText().trim();
@@ -217,15 +210,10 @@ public class SecondFrame extends JFrame{
                     if(j!=0 && j!=cpt)
                     {
                         requete += " and ";
-                        
                     }
-                    
-                    
                 }
             }
-            
-            //System.out.println(requete);
-            
+                        
             return requete;
         }
         
@@ -246,7 +234,6 @@ public class SecondFrame extends JFrame{
             if(!texte[i].getText().trim().equals(""))
             {
                 cpt++;
-                
             }
         }
         if(cpt != 0)
@@ -255,7 +242,6 @@ public class SecondFrame extends JFrame{
             {
                 if(!texte[i].getText().trim().equals(""))
                 {
-                    
                     requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
                     requete += " = '";
                     requete += texte[i].getText().trim();
@@ -265,14 +251,10 @@ public class SecondFrame extends JFrame{
                     if(j!=0 && j!=cpt)
                     {
                         requete += " and ";
-                        
                     }
-                    
-                    
                 }
             }
             
-            //System.out.println(requete);
             requete += " WHERE ";
             requete += controleur.maConnexion.rsetMeta.getColumnName(1);
             requete += " = ";
@@ -281,12 +263,9 @@ public class SecondFrame extends JFrame{
         }
         
         return "";
-        
-        
-        
     }
     
-    private String createAvanceDocteurQuery() throws SQLException
+    private String createAdvancedDocteurQuery() throws SQLException
     {
         /**
          * INFORMATIONS D'UN MALADE
@@ -335,7 +314,7 @@ public class SecondFrame extends JFrame{
         return "";
     }
     
-    private String createAvanceChambreQuery() throws SQLException
+    private String createAdvancedChambreQuery() throws SQLException
     {
         /**
          * INFORMATIONS D'UNE CHAMBRE
@@ -371,7 +350,6 @@ public class SecondFrame extends JFrame{
                     if(j!=0 && j!=cpt)
                     {
                         requete += " and ";
-                        
                     }
                     j+=1;
                 }
@@ -384,7 +362,7 @@ public class SecondFrame extends JFrame{
         return "";
     }
     
-    private String createAvanceQuery() throws SQLException
+    private String createAdvancedQuery() throws SQLException
     {
         /**
          * INFORMATIONS D'UNE CHAMBRE
@@ -451,8 +429,8 @@ public class SecondFrame extends JFrame{
                 query = createFindQuery();
             else if(frameName.equals("Update"))
                 query = createUpdateQuery();
-            else if(frameName.equals("Avance"))
-                query = createAvanceQuery();
+            else if(frameName.equals("Advanced"))
+                query = createAdvancedQuery();
             
             if((frameName.equals("Add")||frameName.equals("Delete")||frameName.equals("Update")) && !query.equals("")) {
                 controleur.queryUpdate(query);

@@ -307,7 +307,7 @@ public class HopitalUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
-            new SecondFrame(controleur, "Avance");
+            new SecondFrame(controleur, "Advanced");
             controleur.updateModel();
             jTable1.setModel(controleur.model);
             
