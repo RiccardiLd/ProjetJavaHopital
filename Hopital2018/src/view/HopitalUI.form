@@ -30,7 +30,7 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemChart1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Chart 1"/>
+                    <Property name="text" type="java.lang.String" value="Nombre de lits par chambre"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemChart1ActionPerformed"/>
@@ -38,7 +38,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemChart2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Chart 2"/>
+                    <Property name="text" type="java.lang.String" value="Nombre de Malade par Mutuelle"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemChart2ActionPerformed"/>
@@ -46,7 +46,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemChart3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Chart 3"/>
+                    <Property name="text" type="java.lang.String" value="R&#xe9;partition des malades par services"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemChart3ActionPerformed"/>

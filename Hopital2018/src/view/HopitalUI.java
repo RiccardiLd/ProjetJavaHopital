@@ -154,7 +154,7 @@ public class HopitalUI extends javax.swing.JFrame {
 
         jMenuChart.setText("New chart...");
 
-        jMenuItemChart1.setText("Chart 1");
+        jMenuItemChart1.setText("Nombre de lits par chambre");
         jMenuItemChart1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemChart1ActionPerformed(evt);
@@ -162,7 +162,7 @@ public class HopitalUI extends javax.swing.JFrame {
         });
         jMenuChart.add(jMenuItemChart1);
 
-        jMenuItemChart2.setText("Chart 2");
+        jMenuItemChart2.setText("Nombre de Malade par Mutuelle");
         jMenuItemChart2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemChart2ActionPerformed(evt);
@@ -170,7 +170,7 @@ public class HopitalUI extends javax.swing.JFrame {
         });
         jMenuChart.add(jMenuItemChart2);
 
-        jMenuItemChart3.setText("Chart 3");
+        jMenuItemChart3.setText("Répartition des malades par services");
         jMenuItemChart3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemChart3ActionPerformed(evt);
