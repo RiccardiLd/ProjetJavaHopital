@@ -320,15 +320,15 @@ public class HopitalUI extends javax.swing.JFrame {
     private void jMenuItemAdvSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdvSearchActionPerformed
         
         try {
-            if (controleur.maConnexion.rsetMeta.getTableName(1).equals("chambre") ||
-                    controleur.maConnexion.rsetMeta.getTableName(1).equals("malade"))
+            String table = controleur.maConnexion.rsetMeta.getTableName(1);
+            if (table.equals("chambre") || table.equals("malade"))
             {
                 new SecondFrame(controleur, "Advanced");
                 controleur.updateModel();
                 jTable1.setModel(controleur.model);
             }
             else JOptionPane.showMessageDialog(null,
-                        "Advanced search not available for this table. Please choose either 'chambre' or 'malade'.",
+                        "Advanced search not supported for current table '" + table + ". Please choose either 'chambre' or 'malade'.",
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
             
