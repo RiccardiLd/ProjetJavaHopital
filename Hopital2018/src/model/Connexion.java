@@ -37,43 +37,56 @@ public class Connexion {
     public ArrayList<String> requetesMaj = new ArrayList<>();
     
     /**
-     * Constructeur avec 4 paramètres : nom, login et password et host la BDD locale
+     * Constructeur avec 4 paramètres : nom, login et password et socket la BDD locale
      *
      * @param nameDatabase
      * @param loginDatabase
      * @param passwordDatabase
-     * @param host
+     * @param socket
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase, String host) 
+    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase, String socket) 
             throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
         
         // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-        String urlDatabase = "jdbc:mysql://localhost" + host + "/" + nameDatabase;//  + nameDatabase;//!!!"8889" macOS only!!!
+        String urlDatabase = "jdbc:mysql://localhost" + socket + "/" + nameDatabase;//  + nameDatabase;//!!!"8889" macOS only!!!
         //création d'une connexion JDBC à la base
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
         //System.out.print(" "+urlDatabase +" " + loginDatabase + " " +passwordDatabase );
         stmt = conn.createStatement();
         //rset = stmt.executeQuery("select * from " + "docteur");
     }
-    
+    /**
+     * Selectionne toutes les valeurs d'une table
+     * @param table nom de la table à récupérer sur la base
+     * @throws SQLException 
+     */
     public void findAll(String table) throws SQLException {
         rset = stmt.executeQuery("select * from " + table);
         // création d'un ordre SQL (statement)
         rsetMeta = rset.getMetaData();
     }
-    
+    /**
+     * Wild card - éxecute une requête
+     * @param query la requête à éxecuter
+     * @throws SQLException 
+     */
     public void query(String query) throws SQLException {
         rset = stmt.executeQuery(query);
         // création d'un ordre SQL (statement)
         rsetMeta = rset.getMetaData();
         
     }
+    /**
+     * Éxecute une requête spécifique - Update
+     * @param query la requête à éxecuter
+     * @throws SQLException 
+     */
     public void queryUpdate(String query) throws SQLException {
-        System.out.println(query + "ok") ;
+        System.out.println(query + " ok") ;
         stmt = conn.createStatement();
         stmt.executeUpdate(query);
         // création d'un ordre SQL (statement)
@@ -82,16 +95,17 @@ public class Connexion {
     
     /**
      * Constructeur avec 5 paramètres : username et password ECE, login,
-     * password et host de la BDD à distance sur le serveur de l'ECE
+ password et socket de la BDD à distance sur le serveur de l'ECE
      * @param usernameECE
      * @param passwordECE
      * @param loginDatabase
      * @param passwordDatabase
-     * @param host
+     * @param socket
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase, String host) throws SQLException, ClassNotFoundException {
+    public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase, String socket) 
+            throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
         

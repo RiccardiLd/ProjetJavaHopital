@@ -21,9 +21,9 @@ public class Controller {
     public MyTableModel model;
     public Connexion maConnexion;
     
-    public Controller(String nameDatabase, String loginDatabase, String passwordDatabase, String host)
+    public Controller(String nameDatabase, String loginDatabase, String passwordDatabase, String socket)
             throws SQLException, ClassNotFoundException {
-        maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase, host);
+        maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase, socket);
         model = new MyTableModel();
     }
     

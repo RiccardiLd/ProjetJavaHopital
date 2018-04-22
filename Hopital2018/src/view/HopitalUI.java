@@ -4,7 +4,7 @@ package view;
 *  (C) Copyright Gianni Riccardi.
 */
 
-import controller.Controller;
+import controller.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +23,8 @@ public class HopitalUI extends javax.swing.JFrame {
     public HopitalUI() throws SQLException, ClassNotFoundException {
         initComponents();
         //controleur = new Controller("hopital","root","root", ":8889");
-        controleur = new Controller("hopital", loginDatabase, passwordDatabase, host);
+        controleur = new Controller("hopital", loginDatabase, passwordDatabase, socket);
+        generator = new QueryGenerator(controleur);
         controleur.findAll("service");
         controleur.updateModel();
         jTable1.setModel(controleur.model);
@@ -253,31 +254,7 @@ public class HopitalUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String path = hopitalTree.getClosestPathForLocation(evt.getX(), evt.getY()).toString();
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
-            String table = "";
-            if (path.contains("Service")) {
-                table = "service";
-            }
-            else if (path.contains("Chambre")) {
-                table = "chambre";
-            }
-            else if (path.contains("Employé")) {
-                table = "employe";
-            }
-            else if (path.contains("Docteur")) {
-                table = "docteur";
-            }
-            else if (path.contains("Infirmier")) {
-                table = "infirmier";
-            }
-            else if (path.contains("Malade")) {
-                table = "malade";
-            }
-            else if (path.contains("Hospitalisation")) {
-                table = "hospitalisation";
-            }
-            else if (path.contains("Soigne")) {
-                table = "soigne";
-            }
+            String table = generator.pathTranslator(path);
             if (!table.equals("")) {
                 try {
                     controleur.findAll(table);
@@ -419,9 +396,9 @@ public class HopitalUI extends javax.swing.JFrame {
                 operationalSystem[0]);
         
         if (OSChoix.equals("MacOS")) 
-            host = ":8889";
+            socket = ":8889";
         else if (OSChoix.equals("Windows"))
-            host = "";
+            socket = "";
         
         
         int option = javax.swing.JOptionPane.showConfirmDialog(null,
@@ -471,8 +448,9 @@ public class HopitalUI extends javax.swing.JFrame {
     
     private static String passwordDatabase;
     private static String loginDatabase;
-    private static String host;
+    private static String socket;
     private final Controller controleur;
+    private final QueryGenerator generator;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree hopitalTree;
     private javax.swing.JButton jButtonAdd;

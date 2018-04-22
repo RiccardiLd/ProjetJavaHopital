@@ -4,7 +4,7 @@
 package view;
 
 import javax.swing.JFrame;
-import controller.Controller;
+import controller.*;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.BoxLayout;
@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 public class SecondFrame extends JFrame{
     
     private final Controller controleur;
+    private final QueryGenerator generator;
     int nbColonnes;
     javax.swing.JTextField[] texte;
     javax.swing.JLabel[] label;
@@ -26,6 +27,7 @@ public class SecondFrame extends JFrame{
         super(frameName);
         this.frameName = frameName;
         this.controleur = controleur;
+        generator = new QueryGenerator(controleur);
         nbColonnes = controleur.maConnexion.rsetMeta.getColumnCount();
         texte = new javax.swing.JTextField[nbColonnes];
         label = new javax.swing.JLabel[nbColonnes];
@@ -69,363 +71,41 @@ public class SecondFrame extends JFrame{
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
-    
-    private String createAddQuery() throws SQLException
-    {
-        int j=0;
-        int cpt=0;
-        String requete = "INSERT INTO " + controleur.maConnexion.rsetMeta.getTableName(1) + " (";
-        /*for(int i = 1; i <= nbColonnes; i++)
-        {
-        label[i-1] = new javax.swing.JLabel(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
-        texte[i-1] = new javax.swing.JTextField();
-        texte[i-1].setPreferredSize(new Dimension(200,25));
-        fieldPane.add(label[i-1]);
-        fieldPane.add(texte[i-1]);
-        }*/
-        for(int i =0; i<nbColonnes; i++)
-        {
-            if(!texte[i].getText().trim().equals(""))
-            {
-                cpt++;
-            }
-        }
-        if(cpt != 0)
-        {
-            for(int i =0; i<nbColonnes; i++)
-            {
-                if(!texte[i].getText().trim().equals(""))
-                {
-                    
-                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
-                    
-                    j+=1;
-                    
-                    if(j!=0 && j!=cpt)
-                    {
-                        requete += ", ";
-                    }
-                }
-            }
-            j=0;
-            requete += ") VALUES (";
-            
-            for(int i =0; i<nbColonnes; i++)
-            {
-                if(!texte[i].getText().trim().equals(""))
-                {
-                    requete += "'";
-                    requete += texte[i].getText().trim();
-                    requete += "'";
-                    j+=1;
-                    
-                    if(j!=0 && j!=cpt)
-                    {
-                        requete += ", ";
-                    }
-                }
-            }
-            requete += ")";
-            
-            return requete;
-        }
-        return "";
-    }
-    
-    private String createDeleteQuery() throws SQLException
-    {
-        
-        int j=0;
-        int cpt=0;
-        String requete = "DELETE FROM " + controleur.maConnexion.rsetMeta.getTableName(1) + " WHERE ";
-        
-        for(int i =0; i<nbColonnes; i++)
-        {
-            if(!texte[i].getText().trim().equals(""))
-            {
-                cpt++;
-                
-            }
-        }
-        if(cpt != 0)
-        {
-            for(int i =0; i<nbColonnes; i++)
-            {
-                if(!texte[i].getText().trim().equals(""))
-                {
-                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
-                    requete += " = '";
-                    requete += texte[i].getText().trim();
-                    requete += "'";
-                    j+=1;
-                    
-                    if(j!=0 && j!=cpt)
-                    {
-                        requete += " and ";
-                        
-                    }
-                }
-            }
-            
-            return requete;
-        }
-        
-        return "";
-        
-        
-        
-    }
-    
-    
-    private String createFindQuery() throws SQLException
-    {
-        
-        int j=0;
-        int cpt=0;
-        String requete = "SELECT * FROM " + controleur.maConnexion.rsetMeta.getTableName(1) + " WHERE ";
-        
-        for(int i =0; i<nbColonnes; i++)
-        {
-            if(!texte[i].getText().trim().equals(""))
-            {
-                cpt++;
-            }
-        }
-        if(cpt != 0)
-        {
-            for(int i =0; i<nbColonnes; i++)
-            {
-                if(!texte[i].getText().trim().equals(""))
-                {
-                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
-                    requete += " = '";
-                    requete += texte[i].getText().trim();
-                    requete += "'";
-                    j+=1;
-                    
-                    if(j!=0 && j!=cpt)
-                    {
-                        requete += " and ";
-                    }
-                }
-            }
-                        
-            return requete;
-        }
-        
-        return "";
-    }
-    
-    private String createUpdateQuery() throws SQLException
-    {
-        /*UPDATE table
-        SET nom_colonne_1 = 'nouvelle valeur'
-        WHERE condition*/
-        int j=0;
-        int cpt=0;
-        String requete = "UPDATE " + controleur.maConnexion.rsetMeta.getTableName(1) + " SET ";
-        System.out.println("LOL");
-        for(int i =1; i<nbColonnes; i++)
-        {
-            if(!texte[i].getText().trim().equals(""))
-            {
-                cpt++;
-            }
-        }
-        if(cpt != 0)
-        {
-            for(int i =1; i<nbColonnes; i++)
-            {
-                if(!texte[i].getText().trim().equals(""))
-                {
-                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
-                    requete += " = '";
-                    requete += texte[i].getText().trim();
-                    requete += "'";
-                    j+=1;
-                    
-                    if(j!=0 && j!=cpt)
-                    {
-                        requete += " and ";
-                    }
-                }
-            }
-            
-            requete += " WHERE ";
-            requete += controleur.maConnexion.rsetMeta.getColumnName(1);
-            requete += " = ";
-            requete += texte[0].getText().trim();
-            return requete;
-        }
-        
-        return "";
-    }
-    
-    private String createAdvancedDocteurQuery() throws SQLException
-    {
-        /**
-         * INFORMATIONS D'UN MALADE
-         * Préselectionner la table malades
-         * Donne des infos sur malade : Chambre, Les docteurs, leurs noms etc 
-         */
-        System.out.println("ICI");
-        int j=0;
-        int cpt=0;
-        String requete = "SELECT * FROM malade m, soigne s, hospitalisation h, docteur d, employe e WHERE ";/*, chambre c, docteur d, employe e WHERE ";*/
-        for(int i =0; i<nbColonnes; i++)
-        {
-            if(!texte[i].getText().trim().equals(""))
-            {
-                cpt++;
-                
-            }
-        }
-        
-        if(cpt != 0)
-        {
-            for(int i =0; i<nbColonnes; i++)
-            {
-                if(!texte[i].getText().trim().equals(""))
-                {
-                    requete += "m.";
-                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
-                    requete += " = '";
-                    requete += texte[i].getText().trim();
-                    requete += "'";
-                    
-                    
-                    if(j!=0 && j!=cpt)
-                    {
-                        requete += " and ";
-                        
-                    }
-                    j+=1;
-                }
-            }
-            requete += "and m.numero = s.no_malade and s.no_malade = h.no_malade and s.no_docteur = d.numero and s.no_docteur = e.numero";
-            System.out.println(requete);
-            return requete;
-        }
-        
-        return "";
-    }
-    
-    private String createAdvancedChambreQuery() throws SQLException
-    {
-        /**
-         * INFORMATIONS D'UNE CHAMBRE
-         * Préselectionner la table chambre
-         * Donne des infos sur chambre : surveillants, Les malades
-         */
-        
-        int j=0;
-        int cpt=0;
-        String requete = "SELECT * FROM chambre c, infirmier i, hospitalisation h, malade m, employe e WHERE ";/*, chambre c, docteur d, employe e WHERE ";*/
-        for(int i =0; i<nbColonnes; i++)
-        {
-            if(!texte[i].getText().trim().equals(""))
-            {
-                cpt++;
-                
-            }
-        }
-        
-        if(cpt != 0)
-        {
-            for(int i =0; i<nbColonnes; i++)
-            {
-                if(!texte[i].getText().trim().equals(""))
-                {
-                    requete += "c.";
-                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
-                    requete += " = '";
-                    requete += texte[i].getText().trim();
-                    requete += "'";
-                    
-                    
-                    if(j!=0 && j!=cpt)
-                    {
-                        requete += " and ";
-                    }
-                    j+=1;
-                }
-            }
-            requete += "and c.no_chambre = h.no_chambre and m.numero = h.no_malade and c.surveillant = e.numero and i.numero = c.surveillant";
-            System.out.println(requete);
-            return requete;
-        }
-        
-        return "";
-    }
-    
-    private String createAdvancedQuery() throws SQLException
-    {
-        /**
-         * INFORMATIONS D'UNE CHAMBRE
-         * Préselectionner la table chambre
-         * Donne des infos sur chambre : surveillants, Les malades
-         */
-        
-        /*int j=0;
-        int cpt=0;
-        String requete = "SELECT * FROM chambre c, infirmier i, hospitalisation h, malade m, employe e WHERE ";
-        for(int i =0; i<nbColonnes; i++)
-        {
-            if(!texte[i].getText().trim().equals(""))
-            {
-                cpt++;
-                
-            }
-        }
-        
-        if(cpt != 0)
-        {
-            for(int i =0; i<nbColonnes; i++)
-            {
-                if(!texte[i].getText().trim().equals(""))
-                {
-                    requete += "c.";
-                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
-                    requete += " = '";
-                    requete += texte[i].getText().trim();
-                    requete += "'";
-                    
-                    
-                    if(j!=0 && j!=cpt)
-                    {
-                        requete += " and ";
-                    }
-                    j+=1;
-                }
-            }
-            requete += "and c.no_chambre = h.no_chambre and m.numero = h.no_malade and c.surveillant = e.numero and i.numero = c.surveillant";
-            System.out.println(requete);
-            return requete;
-        }
-        */
-        return "";
-    }
-    
-    
-    
+    /**
+     * Bouton "Cancel" appuyé
+     * @param evt 
+     */
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         this.dispose();
     }
+    /**
+     * Bouton "Ok" appuyé
+     * @param evt 
+     */
     private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)  {
         // TODO add your handling code here:
         String query = "";
         try{
-            if(frameName.equals("Add"))
-                query = createAddQuery();
-            else if(frameName.equals("Delete"))
-                query = createDeleteQuery();
-            else if(frameName.equals("Find"))
-                query = createFindQuery();
-            else if(frameName.equals("Update"))
-                query = createUpdateQuery();
-            else if(frameName.equals("Advanced"))
-                query = createAdvancedQuery();
+            switch (frameName) {
+                case "Add":
+                    query = generator.createAddQuery(nbColonnes, texte);
+                    break;
+                case "Delete":
+                    query = generator.createDeleteQuery(nbColonnes, texte);
+                    break;
+                case "Find":
+                    query = generator.createFindQuery(nbColonnes, texte);
+                    break;
+                case "Update":
+                    query = generator.createUpdateQuery(nbColonnes, texte);
+                    break;
+                case "Advanced":
+                    query = generator.createAdvancedQuery(nbColonnes, texte);
+                    break;
+                default:
+                    break;
+            }
             
             if((frameName.equals("Add")||frameName.equals("Delete")||frameName.equals("Update")) && !query.equals("")) {
                 controleur.queryUpdate(query);
