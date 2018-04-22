@@ -1,6 +1,6 @@
 /*  Created by riccardild on Apr 22, 2018 12:10:06 PM
- *  (C) Copyright Gianni Riccardi.
- */
+*  (C) Copyright Gianni Riccardi.
+*/
 package controller;
 
 import java.sql.SQLException;
@@ -18,6 +18,16 @@ public class QueryGenerator {
     public QueryGenerator(Controller controleur) {
         this.controleur = controleur;
     }
+    public boolean isValidTable() throws SQLException {
+        String table = controleur.maConnexion.rsetMeta.getTableName(1);
+        int nbColonnes = controleur.maConnexion.rsetMeta.getColumnCount();
+        return (table.equals("service") || table.equals("chambre") ||
+                table.equals("employe") || table.equals("docteur") ||
+                table.equals("infirmier") || table.equals("malade") ||
+                table.equals("hospitalisation") || table.equals("soigne"))
+                &&
+                !(nbColonnes > 6);
+    }
     /**
      * Reçoit le String récupéré dans l'arbre et le traduit en nom de la table correspondante.
      * @param path le path récupéré après la sélection d'un node de l'arbre
@@ -26,33 +36,33 @@ public class QueryGenerator {
     public String pathTranslator(String path) {
         String table = "";
         if (path.contains("Service")) {
-                table = "service";
-            }
-            else if (path.contains("Chambre")) {
-                table = "chambre";
-            }
-            else if (path.contains("Employé")) {
-                table = "employe";
-            }
-            else if (path.contains("Docteur")) {
-                table = "docteur";
-            }
-            else if (path.contains("Infirmier")) {
-                table = "infirmier";
-            }
-            else if (path.contains("Malade")) {
-                table = "malade";
-            }
-            else if (path.contains("Hospitalisation")) {
-                table = "hospitalisation";
-            }
-            else if (path.contains("Soigne")) {
-                table = "soigne";
-            }
+            table = "service";
+        }
+        else if (path.contains("Chambre")) {
+            table = "chambre";
+        }
+        else if (path.contains("Employé")) {
+            table = "employe";
+        }
+        else if (path.contains("Docteur")) {
+            table = "docteur";
+        }
+        else if (path.contains("Infirmier")) {
+            table = "infirmier";
+        }
+        else if (path.contains("Malade")) {
+            table = "malade";
+        }
+        else if (path.contains("Hospitalisation")) {
+            table = "hospitalisation";
+        }
+        else if (path.contains("Soigne")) {
+            table = "soigne";
+        }
         return table;
     }
     
-    public String createAddQuery(int nbColonnes, javax.swing.JTextField[] texte) 
+    public String createAddQuery(int nbColonnes, javax.swing.JTextField[] texte)
             throws SQLException
     {
         int j=0;
@@ -115,7 +125,7 @@ public class QueryGenerator {
         return "";
     }
     
-    public String createDeleteQuery(int nbColonnes, javax.swing.JTextField[] texte) 
+    public String createDeleteQuery(int nbColonnes, javax.swing.JTextField[] texte)
             throws SQLException
     {
         
@@ -157,7 +167,7 @@ public class QueryGenerator {
         return "";
     }
     
-    public String createFindQuery(int nbColonnes, javax.swing.JTextField[] texte) 
+    public String createFindQuery(int nbColonnes, javax.swing.JTextField[] texte)
             throws SQLException
     {
         
@@ -190,14 +200,14 @@ public class QueryGenerator {
                     }
                 }
             }
-                        
+            
             return requete;
         }
         
         return "";
     }
     
-    public String createUpdateQuery(int nbColonnes, javax.swing.JTextField[] texte) 
+    public String createUpdateQuery(int nbColonnes, javax.swing.JTextField[] texte)
             throws SQLException
     {
         /*UPDATE table
@@ -243,13 +253,13 @@ public class QueryGenerator {
         return "";
     }
     
-    public String createAdvancedMaladeQuery(int nbColonnes, javax.swing.JTextField[] texte) 
+    public String createAdvancedMaladeQuery(int nbColonnes, javax.swing.JTextField[] texte)
             throws SQLException
     {
         /**
          * INFORMATIONS D'UN MALADE
          * Préselectionner la table malades
-         * Donne des infos sur malade : Chambre, Les docteurs, leurs noms etc 
+         * Donne des infos sur malade : Chambre, Les docteurs, leurs noms etc
          */
         System.out.println("ICI");
         int j=0;
@@ -293,7 +303,7 @@ public class QueryGenerator {
         return "";
     }
     
-    public String createAdvancedChambreQuery(int nbColonnes, javax.swing.JTextField[] texte) 
+    public String createAdvancedChambreQuery(int nbColonnes, javax.swing.JTextField[] texte)
             throws SQLException
     {
         /**
@@ -342,7 +352,7 @@ public class QueryGenerator {
         return "";
     }
     
-    public String createAdvancedQuery(int nbColonnes, javax.swing.JTextField[] texte) 
+    public String createAdvancedQuery(int nbColonnes, javax.swing.JTextField[] texte)
             throws SQLException
     {
         /**
@@ -350,7 +360,7 @@ public class QueryGenerator {
          */
         if(controleur.maConnexion.rsetMeta.getTableName(1).equals("chambre"))
         {
-         return createAdvancedChambreQuery(nbColonnes, texte);   
+            return createAdvancedChambreQuery(nbColonnes, texte);
         }
         
         

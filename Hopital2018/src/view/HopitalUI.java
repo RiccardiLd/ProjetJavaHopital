@@ -275,8 +275,12 @@ public class HopitalUI extends javax.swing.JFrame {
     
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         try {
-            new SecondFrame(controleur, "Add");
-            
+            if (generator.isValidTable())
+                new SecondFrame(controleur, "Add");
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot add to this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -284,8 +288,12 @@ public class HopitalUI extends javax.swing.JFrame {
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         try {
-            new SecondFrame(controleur, "Delete");
-            
+            if (generator.isValidTable())
+                new SecondFrame(controleur, "Delete");
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot delete from this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -293,10 +301,15 @@ public class HopitalUI extends javax.swing.JFrame {
 
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
         try {
-            new SecondFrame(controleur, "Find");
-            controleur.updateModel();
-            jTable1.setModel(controleur.model);
-            
+            if (generator.isValidTable()) {
+                new SecondFrame(controleur, "Find");
+                controleur.updateModel();
+                jTable1.setModel(controleur.model);
+            }
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot search from this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -308,10 +321,15 @@ public class HopitalUI extends javax.swing.JFrame {
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         try {
-            new SecondFrame(controleur, "Update");
-            controleur.updateModel();
-            jTable1.setModel(controleur.model);
-            
+            if (generator.isValidTable()) {
+                new SecondFrame(controleur, "Update");
+                controleur.updateModel();
+                jTable1.setModel(controleur.model);
+            }
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot Update this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,9 +346,9 @@ public class HopitalUI extends javax.swing.JFrame {
                 jTable1.setModel(controleur.model);
             }
             else JOptionPane.showMessageDialog(null,
-                        "Advanced search not supported for current table '" + table + "'. Please choose either 'chambre' or 'malade'.",
-                        "Warning",
-                        JOptionPane.WARNING_MESSAGE);
+                    "Advanced search not supported for current table '" + table + "'. Please choose either 'chambre' or 'malade'.",
+                    "Warning",
+                    JOptionPane.WARNING_MESSAGE);
             
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,8 +357,12 @@ public class HopitalUI extends javax.swing.JFrame {
 
     private void jMenuItemAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddActionPerformed
         try {
-            new SecondFrame(controleur, "Add");
-            
+            if (generator.isValidTable())
+                new SecondFrame(controleur, "Add");
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot Add to this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -348,7 +370,12 @@ public class HopitalUI extends javax.swing.JFrame {
 
     private void jMenuItemDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteActionPerformed
         try {
-            new SecondFrame(controleur, "Delete");
+            if (generator.isValidTable())
+                new SecondFrame(controleur, "Delete");
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot delete from this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -357,9 +384,15 @@ public class HopitalUI extends javax.swing.JFrame {
 
     private void jMenuItemFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindActionPerformed
         try {
-            new SecondFrame(controleur, "Find");
-            controleur.updateModel();
-            jTable1.setModel(controleur.model);
+            if (generator.isValidTable()) {
+                new SecondFrame(controleur, "Find");
+                controleur.updateModel();
+                jTable1.setModel(controleur.model);
+            }
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot search from this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
