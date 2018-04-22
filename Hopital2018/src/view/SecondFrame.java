@@ -118,7 +118,7 @@ public class SecondFrame extends JFrame{
                 JOptionPane.showMessageDialog(this,
                     "Requête réalisée : " + query);
             }
-            else if((frameName.equals("Find")||frameName.equals("Avance")) && !query.equals("")) {
+            else if((frameName.equals("Find")||frameName.equals("Advanced")) && !query.equals("")) {
                 controleur.query(query);///Attention ICI au equals Avance
                 JOptionPane.showMessageDialog(this,
                     "Requête réalisée : " + query);
