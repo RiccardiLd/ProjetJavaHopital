@@ -250,7 +250,11 @@ public class HopitalUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Détecte un clique de la souris dans l'arbre du programme
+     * @param evt
+     */
     private void hopitalTreeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopitalTreeMouseReleased
         String path = hopitalTree.getClosestPathForLocation(evt.getX(), evt.getY()).toString();
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
@@ -272,7 +276,10 @@ public class HopitalUI extends javax.swing.JFrame {
             jPopupMenuTree.show(hopitalTree.getComponentAt(evt.getX(), evt.getY()), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_hopitalTreeMouseReleased
-    
+    /**
+     * Bouton "Add" appuyé
+     * @param evt
+     */
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         try {
             if (generator.isValidTable())
@@ -285,7 +292,10 @@ public class HopitalUI extends javax.swing.JFrame {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonAddActionPerformed
-
+    /**
+     * Bouton "Delete" appuyé
+     * @param evt
+     */
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         try {
             if (generator.isValidTable())
@@ -298,7 +308,10 @@ public class HopitalUI extends javax.swing.JFrame {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
-
+    /**
+     * Bouton "Find" appuyé
+     * @param evt
+     */
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
         try {
             if (generator.isValidTable()) {
@@ -314,11 +327,17 @@ public class HopitalUI extends javax.swing.JFrame {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonFindActionPerformed
-
+    /**
+     * Met à jour le Model du tableau principal du programme
+     * @param evt
+     */
     private void jMenuItemUpdateModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateModelActionPerformed
         jTable1.setModel(controleur.model);
     }//GEN-LAST:event_jMenuItemUpdateModelActionPerformed
-
+    /**
+     * Bouton "Update" appuyé
+     * @param evt
+     */
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         try {
             if (generator.isValidTable()) {
@@ -334,7 +353,10 @@ public class HopitalUI extends javax.swing.JFrame {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonUpdateActionPerformed
-
+    /**
+     * Réalise une recherche avancée
+     * @param evt
+     */
     private void jMenuItemAdvSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdvSearchActionPerformed
         
         try {
@@ -354,7 +376,10 @@ public class HopitalUI extends javax.swing.JFrame {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemAdvSearchActionPerformed
-
+    /**
+     * Alternative pour le bouton "Add"
+     * @param evt
+     */
     private void jMenuItemAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddActionPerformed
         try {
             if (generator.isValidTable())
@@ -367,7 +392,10 @@ public class HopitalUI extends javax.swing.JFrame {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemAddActionPerformed
-
+    /**
+     * Alternative pour le bouton "Delete"
+     * @param evt
+     */
     private void jMenuItemDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteActionPerformed
         try {
             if (generator.isValidTable())
@@ -381,7 +409,10 @@ public class HopitalUI extends javax.swing.JFrame {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemDeleteActionPerformed
-
+    /**
+     * Alternative pour le bouton "Find"
+     * @param evt
+     */
     private void jMenuItemFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindActionPerformed
         try {
             if (generator.isValidTable()) {
