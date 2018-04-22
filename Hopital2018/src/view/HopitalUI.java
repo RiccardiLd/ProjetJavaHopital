@@ -251,7 +251,6 @@ public class HopitalUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void hopitalTreeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopitalTreeMouseReleased
-        // TODO add your handling code here:
         String path = hopitalTree.getClosestPathForLocation(evt.getX(), evt.getY()).toString();
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
             String table = generator.pathTranslator(path);
@@ -274,7 +273,6 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_hopitalTreeMouseReleased
     
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        // TODO add your handling code here:
         try {
             new SecondFrame(controleur, "Add");
             
@@ -284,7 +282,6 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-        // TODO add your handling code here:
         try {
             new SecondFrame(controleur, "Delete");
             
@@ -294,7 +291,6 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
-        // TODO add your handling code here:
         try {
             new SecondFrame(controleur, "Find");
             controleur.updateModel();
@@ -306,14 +302,11 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFindActionPerformed
 
     private void jMenuItemUpdateModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateModelActionPerformed
-        // TODO add your handling code here:
         jTable1.setModel(controleur.model);
     }//GEN-LAST:event_jMenuItemUpdateModelActionPerformed
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-        // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
             new SecondFrame(controleur, "Update");
             controleur.updateModel();
             jTable1.setModel(controleur.model);
@@ -324,9 +317,7 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jMenuItemAdvSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdvSearchActionPerformed
-        // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
             new SecondFrame(controleur, "Advanced");
             controleur.updateModel();
             jTable1.setModel(controleur.model);
@@ -337,7 +328,6 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAdvSearchActionPerformed
 
     private void jMenuItemAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddActionPerformed
-        // TODO add your handling code here:
         try {
             new SecondFrame(controleur, "Add");
             
@@ -347,7 +337,6 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAddActionPerformed
 
     private void jMenuItemDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteActionPerformed
-        // TODO add your handling code here:
         try {
             new SecondFrame(controleur, "Delete");
             
@@ -357,7 +346,6 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemDeleteActionPerformed
 
     private void jMenuItemFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindActionPerformed
-        // TODO add your handling code here:
         try {
             new SecondFrame(controleur, "Find");
             controleur.updateModel();
@@ -369,7 +357,7 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemFindActionPerformed
     
     /**
-     * Code se declenchera automatiquement avant le main à chaque fois.
+     * Code static qui se declenchera automatiquement avant le main à chaque fois.
      * Demande à l'utilisateur de rentrer ses informations pour accéder à la base.
      */
     // <editor-fold defaultstate="collapsed" desc="Static login screen"> 

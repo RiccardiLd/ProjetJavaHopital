@@ -22,7 +22,12 @@ public class SecondFrame extends JFrame{
     javax.swing.JTextField[] texte;
     javax.swing.JLabel[] label;
     String frameName;
-    
+    /**
+     * Constructeur de la SecondFrame
+     * @param controleur le controleur principal du projet
+     * @param frameName le nom de la fênetre, qui décidera aussi de sa fonction
+     * @throws SQLException 
+     */
     public SecondFrame(Controller controleur, String frameName) throws SQLException {
         super(frameName);
         this.frameName = frameName;
@@ -34,7 +39,10 @@ public class SecondFrame extends JFrame{
         init();
         //createAddRequete();
     }
-    
+    /**
+     * Méthode appelée depuis le constructeur pour initialiser la SecondFrame
+     * @throws SQLException 
+     */
     private void init() throws SQLException {
         JPanel pane = new JPanel();
         JPanel buttonPane = new JPanel();
@@ -70,13 +78,11 @@ public class SecondFrame extends JFrame{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-
     /**
      * Bouton "Cancel" appuyé
      * @param evt 
      */
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         this.dispose();
     }
     /**
@@ -84,7 +90,6 @@ public class SecondFrame extends JFrame{
      * @param evt 
      */
     private void jButtonOkActionPerformed(java.awt.event.ActionEvent evt)  {
-        // TODO add your handling code here:
         String query = "";
         try{
             switch (frameName) {
