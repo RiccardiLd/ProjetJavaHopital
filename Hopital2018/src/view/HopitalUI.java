@@ -318,10 +318,19 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jMenuItemAdvSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdvSearchActionPerformed
+        
         try {
-            new SecondFrame(controleur, "Advanced");
-            controleur.updateModel();
-            jTable1.setModel(controleur.model);
+            if (controleur.maConnexion.rsetMeta.getTableName(1).equals("chambre") ||
+                    controleur.maConnexion.rsetMeta.getTableName(1).equals("malade"))
+            {
+                new SecondFrame(controleur, "Advanced");
+                controleur.updateModel();
+                jTable1.setModel(controleur.model);
+            }
+            else JOptionPane.showMessageDialog(null,
+                        "Advanced search not available for this table. Please choose either 'chambre' or 'malade'.",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
             
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -361,7 +370,7 @@ public class HopitalUI extends javax.swing.JFrame {
      * Code static qui se declenchera automatiquement avant le main à chaque fois.
      * Demande à l'utilisateur de rentrer ses informations pour accéder à la base.
      */
-    // <editor-fold defaultstate="collapsed" desc="Static login screen"> 
+    // <editor-fold defaultstate="collapsed" desc="Static login screen">
     static
     {
         javax.swing.Icon icon = new javax.swing.ImageIcon("Img/Hospital_Icon.png");
@@ -385,14 +394,14 @@ public class HopitalUI extends javax.swing.JFrame {
                 operationalSystem[0]);
         if (OSChoix == null)
             System.exit(0);
-        else if (OSChoix.equals("MacOS")) 
+        else if (OSChoix.equals("MacOS"))
             socket = ":8889";
         else if (OSChoix.equals("Windows"))
             socket = "";
         
         int option = javax.swing.JOptionPane.showConfirmDialog(null,
-                message, 
-                "Login - Hôpital", 
+                message,
+                "Login - Hôpital",
                 javax.swing.JOptionPane.OK_CANCEL_OPTION,
                 javax.swing.JOptionPane.QUESTION_MESSAGE,
                 icon);
@@ -403,42 +412,42 @@ public class HopitalUI extends javax.swing.JFrame {
         }
         else System.exit(0);
     }// </editor-fold>
-        
-        /**
-         * @param args the command line arguments
-         */
-        public static void main(String args[]) {
-            /* Set the Nimbus look and feel */
-            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-            */
-            try {
-                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                    if ("Nimbus".equals(info.getName())) {
-                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    }
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(HopitalUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-            //</editor-fold>
-            
-            /* Create and display the form */
-            java.awt.EventQueue.invokeLater(() -> {
-                try {
-                    new HopitalUI().setVisible(true);
-                } catch (SQLException | ClassNotFoundException ex) {
-                    Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(null,
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(HopitalUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new HopitalUI().setVisible(true);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null,
                         "Wrong username and/or password - access denied.",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
-                    System.exit(1);
-                }
-            });
-        }
+                System.exit(1);
+            }
+        });
+    }
     
     private static String passwordDatabase;
     private static String loginDatabase;
