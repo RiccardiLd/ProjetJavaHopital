@@ -78,12 +78,14 @@ public class PieChart extends JFrame {
     private PieDataset createDataset() 
     {
         DefaultPieDataset result = new DefaultPieDataset();
-        int j = 0;
-        while (titre.size() > j) {
-		System.out.println(titre.get(j));
-                result.setValue((String)titre.get(j),(int) val.get(j));
-		j++;
-		}        
+        result.setValue("hhh", 5);
+        result.setValue("jjj", 4);
+        /*int j = 0;
+        while (titre.size()-1 > j) {
+        System.out.println(titre.get(j));
+        result.setValue((String)titre.get(j),(int) val.get(j));
+        j++;
+        } */       
         
         return result;
     }
