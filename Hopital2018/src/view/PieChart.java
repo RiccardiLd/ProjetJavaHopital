@@ -6,8 +6,6 @@ package view;
 import controller.Controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 import org.jfree.chart.ChartFactory;
@@ -26,27 +24,35 @@ public class PieChart extends JFrame {
 
     private static final long serialVersionUID = 1L;
     PieDataset dataset;
-    ArrayList<String> titre= new ArrayList();
-    ArrayList val= new ArrayList();
+    ArrayList<String> titre = new ArrayList();
+    ArrayList<Number> val = new ArrayList();
 
-    
-    
+    /**
+     * Le constructeur de PieChart
+     * @param controleur le controleur principal du projet
+     * @param strQuery la requête sql pour le PieChart
+     * @param Tfen nom de base de la fenêtre
+     * @throws SQLException 
+     */
     public PieChart(Controller controleur, String strQuery, String Tfen) throws SQLException {
         super(Tfen);
-        this.PieChambre(controleur, strQuery);
+        this.createPieChart(controleur, strQuery);
         dataset = createDataset();
         JFreeChart chart = createChart(dataset,"");
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(700, 370));
         setContentPane(chartPanel);
-
     }
 
-    public void PieChambre(Controller controleur, String strQuery) throws SQLException
+    /**
+     * Créé un PieChart avec la requête réalisée
+     * @param controleur le controleur pricipal du projet
+     * @param strQuery la requête qui instancie le PieChart
+     * @throws SQLException 
+     */
+    public void createPieChart(Controller controleur, String strQuery) throws SQLException
     {
-        //controleur.maConnexion.query("SELECT nb_lits, COUNT(no_chambre) FROM `chambre` GROUP BY nb_lits");
         controleur.maConnexion.query(strQuery);
-      
         int j = 1;
         while(controleur.maConnexion.rset.next()){
             for(int i = 1; i <= controleur.maConnexion.rsetMeta.getColumnCount(); i++)
@@ -58,30 +64,23 @@ public class PieChart extends JFrame {
             }
             j++;
         }
-        
-        /*for(int k = 0; k < titre.size()-1; k++)
-        {   System.out.print("\t Le nb de lit: " + titre.get(k) + "\t |");
-            System.out.print("\t Le nb de chambre: " + val.get(k) + "\t |");
-        }  */
     }
-    
-   
     /**
      * Creates a sample dataset
      */
     private  PieDataset createDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
-        //result.setValue(titre.get(0), (Number) val.get(0));
         for (int i=0; i<titre.size();i++)
         {
-           result.setValue(titre.get(i), (Number) val.get(i)); 
+           result.setValue(titre.get(i), val.get(i)); 
         }
         return result;
-
     }
-
     /**
-     * Creates a chart
+     * Créé un Chart
+     * @param dataset
+     * @param title
+     * @return 
      */
     private JFreeChart createChart(PieDataset dataset, String title) {
 
@@ -100,11 +99,13 @@ public class PieChart extends JFrame {
         return chart;
 
     }
-    
+    /**
+     * Affiche le PieChart
+     */
     public void affPieChart()
     {
         this.pack();
         this.setVisible(true);
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 }

@@ -38,7 +38,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemChart2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nombre de Malade par Mutuelle"/>
+                    <Property name="text" type="java.lang.String" value="R&#xe9;partition des malades par mutuelle"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemChart2ActionPerformed"/>

@@ -162,7 +162,7 @@ public class HopitalUI extends javax.swing.JFrame {
         });
         jMenuChart.add(jMenuItemChart1);
 
-        jMenuItemChart2.setText("Nombre de Malade par Mutuelle");
+        jMenuItemChart2.setText("Répartition des malades par mutuelle");
         jMenuItemChart2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemChart2ActionPerformed(evt);
@@ -447,9 +447,7 @@ public class HopitalUI extends javax.swing.JFrame {
 
     private void jMenuItemChart1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart1ActionPerformed
         try {
-            // TODO add your handling code here:
             PieChart p1 = new PieChart(controleur,"SELECT nb_lits, COUNT(no_chambre) FROM `chambre` GROUP BY nb_lits", "Nombre de lits par chambre");
-            
             p1.affPieChart();
             
         } catch (SQLException ex) {
@@ -458,10 +456,7 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemChart1ActionPerformed
 
     private void jMenuItemChart2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart2ActionPerformed
-        // TODO add your handling code here:
-        
            try {
-            // TODO add your handling code here:
             PieChart p2 = new PieChart(controleur,"SELECT mutuelle, COUNT(nom) FROM `malade` GROUP BY mutuelle", "Nombre de Malade par Mutuelle");
             p2.affPieChart();
             
@@ -471,9 +466,7 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemChart2ActionPerformed
 
     private void jMenuItemChart3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart3ActionPerformed
-        // TODO add your handling code here:
            try {
-            // TODO add your handling code here:
             PieChart p3 = new PieChart(controleur,"SELECT code_service, COUNT(no_malade) FROM `hospitalisation` GROUP BY code_service", "Répartition des malades par services");
             p3.affPieChart();
             
