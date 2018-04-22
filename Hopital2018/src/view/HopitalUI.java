@@ -395,6 +395,7 @@ public class HopitalUI extends javax.swing.JFrame {
      * Code se declenchera automatiquement avant le main à chaque fois.
      * Demande à l'utilisateur de rentrer ses informations pour accéder à la base.
      */
+    // <editor-fold defaultstate="collapsed" desc="Static login screen"> 
     static
     {
         javax.swing.Icon icon = new javax.swing.ImageIcon("Img/Hospital_Icon.png");
@@ -435,7 +436,7 @@ public class HopitalUI extends javax.swing.JFrame {
             passwordDatabase = password.getText();
         }
         else System.exit(0);
-    }
+    }// </editor-fold>
         
         /**
          * @param args the command line arguments
