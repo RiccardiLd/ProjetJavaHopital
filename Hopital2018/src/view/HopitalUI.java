@@ -1,7 +1,7 @@
 package view;
 
 /*  Created by riccardild on Apr 19, 2018 11:04:07 AM
-*  (C) Copyright Gianni Riccardi.
+*  (C) Copyright Gianni Riccardi, Théo Minier, Marie-Claire Belamy.
 */
 
 import controller.*;
@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author riccardild
+ * @author theo
+ * @author marie-claire
  */
 public class HopitalUI extends javax.swing.JFrame {
     

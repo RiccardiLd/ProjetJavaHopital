@@ -1,5 +1,5 @@
 /*  Created by riccardild on Apr 22, 2018 12:10:06 PM
-*  (C) Copyright Gianni Riccardi.
+*  (C) Copyright Gianni Riccardi, Théo Minier, Marie-Claire Belamy.
 */
 package controller;
 
@@ -8,6 +8,8 @@ import java.sql.SQLException;
 /**
  *
  * @author riccardild
+ * @author theo
+ * @author marie-claire
  */
 public class QueryGenerator {
     private final Controller controleur;

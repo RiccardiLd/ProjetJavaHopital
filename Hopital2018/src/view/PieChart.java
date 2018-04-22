@@ -1,5 +1,5 @@
 /*  Created by riccardild on Apr 17, 2018 11:21:32 AM
- *  (C) Copyright Gianni Riccardi.
+ *  (C) Copyright Gianni Riccardi, Théo Minier, Marie-Claire Belamy.
  */
 package view;
 
@@ -19,6 +19,8 @@ import org.jfree.util.Rotation;
 /**
  *
  * @author riccardild
+ * @author theo
+ * @author marie-claire
  */
 public class PieChart extends JFrame {
 
@@ -97,7 +99,6 @@ public class PieChart extends JFrame {
         plot.setDirection(Rotation.CLOCKWISE);
         plot.setForegroundAlpha(0.5f);
         return chart;
-
     }
     /**
      * Affiche le PieChart
