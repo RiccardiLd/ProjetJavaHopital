@@ -105,6 +105,6 @@ public class PieChart extends JFrame {
     {
         this.pack();
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
