@@ -22,9 +22,9 @@ public class Controller {
     public MyModel model;
     public Connexion maConnexion;
     
-    public Controller(String nameDatabase, String loginDatabase, String passwordDatabase)
+    public Controller(String nameDatabase, String loginDatabase, String passwordDatabase, String host)
             throws SQLException, ClassNotFoundException {
-        maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase);
+        maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase, host);
         model = new MyModel();
     }
     

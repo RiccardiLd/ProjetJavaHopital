@@ -37,20 +37,22 @@ public class Connexion {
     public ArrayList<String> requetesMaj = new ArrayList<>();
     
     /**
-     * Constructeur avec 3 paramètres : nom, login et password de la BDD locale
+     * Constructeur avec 4 paramètres : nom, login et password et host la BDD locale
      *
      * @param nameDatabase
      * @param loginDatabase
      * @param passwordDatabase
+     * @param host
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
+    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase, String host) 
+            throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
         
         // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-        String urlDatabase = "jdbc:mysql://localhost:8889/" + nameDatabase;//  + nameDatabase;//!!!"8889" macOS only!!!
+        String urlDatabase = "jdbc:mysql://localhost" + host + "/" + nameDatabase;//  + nameDatabase;//!!!"8889" macOS only!!!
         //création d'une connexion JDBC à la base
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
         //System.out.print(" "+urlDatabase +" " + loginDatabase + " " +passwordDatabase );
@@ -79,16 +81,17 @@ public class Connexion {
     }
     
     /**
-     * Constructeur avec 4 paramètres : username et password ECE, login et
-     * password de la BDD à distance sur le serveur de l'ECE
+     * Constructeur avec 5 paramètres : username et password ECE, login,
+     * password et host de la BDD à distance sur le serveur de l'ECE
      * @param usernameECE
      * @param passwordECE
      * @param loginDatabase
      * @param passwordDatabase
+     * @param host
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
+    public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase, String host) throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
         

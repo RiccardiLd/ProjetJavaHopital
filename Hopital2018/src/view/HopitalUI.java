@@ -8,7 +8,6 @@ import controller.Controller;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.*;
 
 /**
  *
@@ -23,7 +22,8 @@ public class HopitalUI extends javax.swing.JFrame {
      */
     public HopitalUI() throws SQLException, ClassNotFoundException {
         initComponents();
-        controleur = new Controller("hopital","root","root");
+        controleur = new Controller("hopital", loginDatabase, passwordDatabase, host);
+        //controleur = new Controller("hopital","root","root", ":8889");
     }
     
     /**
@@ -44,7 +44,7 @@ public class HopitalUI extends javax.swing.JFrame {
         jButtonAdd = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jButtonFind = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
@@ -126,10 +126,10 @@ public class HopitalUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Update");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonUpdate.setText("Update");
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonUpdateActionPerformed(evt);
             }
         });
 
@@ -173,7 +173,7 @@ public class HopitalUI extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                            .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(94, 94, 94)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -194,7 +194,7 @@ public class HopitalUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonFind)
-                            .addComponent(jButton1))
+                            .addComponent(jButtonUpdate))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addGap(0, 50, Short.MAX_VALUE)))
@@ -290,7 +290,7 @@ public class HopitalUI extends javax.swing.JFrame {
         jTable1.setModel(controleur.model);
     }//GEN-LAST:event_jMenuItemUpdateModelActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
@@ -301,7 +301,7 @@ public class HopitalUI extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -399,11 +399,11 @@ public class HopitalUI extends javax.swing.JFrame {
     private final Controller controleur;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree hopitalTree;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonFind;
+    private javax.swing.JButton jButtonUpdate;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuEdit;
     private javax.swing.JMenu jMenuFile;

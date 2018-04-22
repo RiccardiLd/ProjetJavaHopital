@@ -47,7 +47,6 @@ public class SecondFrame extends JFrame{
             jButtonCancelActionPerformed(evt);
         });
         
-        
         for(int i = 1; i <= nbColonnes; i++)
         {
             label[i-1] = new javax.swing.JLabel(controleur.maConnexion.rsetMeta.getColumnName(i).toUpperCase());
@@ -398,7 +397,6 @@ public class SecondFrame extends JFrame{
                     if(j!=0 && j!=cpt)
                     {
                         requete += " and ";
-                        
                     }
                     j+=1;
                 }
