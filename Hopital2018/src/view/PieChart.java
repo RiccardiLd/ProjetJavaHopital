@@ -27,27 +27,13 @@ public class PieChart extends JFrame {
 
     private static final long serialVersionUID = 1L;
     PieDataset dataset;
-    ArrayList title = new ArrayList();
-    ArrayList value = new ArrayList();
-
-    public PieChart(String applicationTitle, String chartTitle) {
-        super(applicationTitle);
-        // This will create the dataset
-        dataset = createDataset();
-        // based on the dataset we create the chart
-        JFreeChart chart = createChart(dataset, chartTitle);
-        // we put the chart into a panel
-        ChartPanel chartPanel = new ChartPanel(chart);
-        // default size
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        // add it to our application
-        setContentPane(chartPanel);
-
-    }
     
+        ArrayList<String> titre= new ArrayList();
+        ArrayList val= new ArrayList();
+
     public PieChart() throws SQLException {
         super();
-        dataset = createDataset();
+        //dataset = createDataset();
         JFreeChart chart = createChart(dataset,"");
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
@@ -55,52 +41,54 @@ public class PieChart extends JFrame {
 
     }
 
+    /**
+     *
+     * @param controleur
+     * @throws SQLException
+     */
+    @SuppressWarnings("UnusedAssignment")
     public void PieChambre(Controller controleur) throws SQLException
     {
+        //DefaultPieDataset dataset = new DefaultPieDataset();
         controleur.maConnexion.query("SELECT nb_lits, COUNT(no_chambre) FROM `chambre` GROUP BY nb_lits");
-        
+        int i=1;
+        //ArrayList<String> titre= new ArrayList();
+        //ArrayList val= new ArrayList();
         while(controleur.maConnexion.rset.next()){
-          
-            for(int i = 1; i <= controleur.maConnexion.rsetMeta.getColumnCount(); i+=2)
-            {
-                //System.out.print("\t" + controleur.maConnexion.rset.getObject(i).toString() + "\t |");
-                title.add(controleur.maConnexion.rset.getObject(i).toString());
-                value.add(controleur.maConnexion.rset.getObject(i+1).toString());
-            }
-        }
-    }
-    
-    
-   
-    /**
-     * Creates a sample dataset
-     */
-    private  PieDataset createDataset() {
-        DefaultPieDataset result = new DefaultPieDataset(); 
-        String titre = new String();
-        int valeur;
-        for (int i=1; i<5;i++)
-        {
-            result.setValue("Text"+i, i);
-            
-        } 
-        //result.setValue("Linux", 29);
-        //result.setValue("Mac", 21);
         
-        /*
-        for(int i = 0; i < title.size(); i++)
-        {
-            titre = (String)title.get(i);
-            valeur= (int)value.get(i);
-            System.out.print(titre+ " : "+ valeur+ "\t |");
-            result.setValue(titre, valeur);
-            //result.setValue(title.get(i), value.get(i));
-        }  */
+            if (i%2!=0)
+            {
+            //titre=(String) controleur.maConnexion.rset.getObject(i).toString();
+            //titre.add((String) controleur.maConnexion.rset.getObject(i));
+                titre.add("Coucou"+i);
+            }
+            else
+            {
+            //val=(int) controleur.maConnexion.rset.getObject(i);
+            //val.add((int) controleur.maConnexion.rset.getObject(i));
+                val.add(i);
+            }
+            i++;
+            }
+        dataset = createDataset();
+    
+    }
+        
+    
+    private PieDataset createDataset() 
+    {
+        DefaultPieDataset result = new DefaultPieDataset();
+        int j = 0;
+        while (titre.size() > j) {
+		System.out.println(titre.get(j));
+                result.setValue((String)titre.get(j),(int) val.get(j));
+		j++;
+		}        
         
         return result;
-
     }
-
+    
+    
     /**
      * Creates a chart
      */
