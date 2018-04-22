@@ -243,7 +243,7 @@ public class QueryGenerator {
         return "";
     }
     
-    public String createAdvancedDocteurQuery(int nbColonnes, javax.swing.JTextField[] texte) 
+    public String createAdvancedMaladeQuery(int nbColonnes, javax.swing.JTextField[] texte) 
             throws SQLException
     {
         /**
@@ -346,48 +346,20 @@ public class QueryGenerator {
             throws SQLException
     {
         /**
-         * INFORMATIONS D'UNE CHAMBRE
-         * Préselectionner la table chambre
-         * Donne des infos sur chambre : surveillants, Les malades
+         * Choisis la bonne requete avancee en fonction de la table dejà selectionnée
          */
-        
-        /*int j=0;
-        int cpt=0;
-        String requete = "SELECT * FROM chambre c, infirmier i, hospitalisation h, malade m, employe e WHERE ";
-        for(int i =0; i<nbColonnes; i++)
+        if(controleur.maConnexion.rsetMeta.getTableName(1).equals("chambre"))
         {
-            if(!texte[i].getText().trim().equals(""))
-            {
-                cpt++;
-                
-            }
+         return createAdvancedChambreQuery(nbColonnes, texte);   
         }
         
-        if(cpt != 0)
+        
+        if(controleur.maConnexion.rsetMeta.getTableName(1).equals("malade"))
         {
-            for(int i =0; i<nbColonnes; i++)
-            {
-                if(!texte[i].getText().trim().equals(""))
-                {
-                    requete += "c.";
-                    requete += controleur.maConnexion.rsetMeta.getColumnName(i+1);
-                    requete += " = '";
-                    requete += texte[i].getText().trim();
-                    requete += "'";
-                    
-                    
-                    if(j!=0 && j!=cpt)
-                    {
-                        requete += " and ";
-                    }
-                    j+=1;
-                }
-            }
-            requete += "and c.no_chambre = h.no_chambre and m.numero = h.no_malade and c.surveillant = e.numero and i.numero = c.surveillant";
-            System.out.println(requete);
-            return requete;
+            return createAdvancedMaladeQuery(nbColonnes, texte);
         }
-        */
-        return "";
+        
+        
+        else return "";
     }
 }
