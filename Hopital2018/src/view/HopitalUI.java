@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class HopitalUI extends javax.swing.JFrame {
     
     /**
-     * Creates new form DesignTest2UI
+     * Creates new form HopitalUI
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
@@ -48,10 +48,17 @@ public class HopitalUI extends javax.swing.JFrame {
         jButtonDelete = new javax.swing.JButton();
         jButtonFind = new javax.swing.JButton();
         jButtonUpdate = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuFile = new javax.swing.JMenu();
+        jMenuOptions = new javax.swing.JMenu();
+        jMenuItemAdvSearch = new javax.swing.JMenuItem();
+        jMenuChart = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuEdit = new javax.swing.JMenu();
+        jMenuItemAdd = new javax.swing.JMenuItem();
+        jMenuItemDelete = new javax.swing.JMenuItem();
+        jMenuItemFind = new javax.swing.JMenuItem();
         jMenuItemUpdateModel = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,15 +104,12 @@ public class HopitalUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         jButtonAdd.setText("Add");
@@ -136,17 +140,59 @@ public class HopitalUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Recherche avancée 1");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuOptions.setText("Options");
+
+        jMenuItemAdvSearch.setText("New advanced search...");
+        jMenuItemAdvSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jMenuItemAdvSearchActionPerformed(evt);
             }
         });
+        jMenuOptions.add(jMenuItemAdvSearch);
 
-        jMenuFile.setText("File");
-        jMenuBar1.add(jMenuFile);
+        jMenuChart.setText("New chart...");
+
+        jMenuItem1.setText("Chart 1");
+        jMenuChart.add(jMenuItem1);
+
+        jMenuItem2.setText("Chart 2");
+        jMenuChart.add(jMenuItem2);
+
+        jMenuItem3.setText("Chart 3");
+        jMenuChart.add(jMenuItem3);
+
+        jMenuOptions.add(jMenuChart);
+
+        jMenuBar1.add(jMenuOptions);
 
         jMenuEdit.setText("Edit");
+
+        jMenuItemAdd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemAdd.setText("Add");
+        jMenuItemAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAddActionPerformed(evt);
+            }
+        });
+        jMenuEdit.add(jMenuItemAdd);
+
+        jMenuItemDelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemDelete.setText("Delete");
+        jMenuItemDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDeleteActionPerformed(evt);
+            }
+        });
+        jMenuEdit.add(jMenuItemDelete);
+
+        jMenuItemFind.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemFind.setText("Find");
+        jMenuItemFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFindActionPerformed(evt);
+            }
+        });
+        jMenuEdit.add(jMenuItemFind);
 
         jMenuItemUpdateModel.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemUpdateModel.setText("Update table model");
@@ -167,20 +213,18 @@ public class HopitalUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonFind, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(94, 94, 94)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                            .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,9 +242,7 @@ public class HopitalUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonFind)
                             .addComponent(jButtonUpdate))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addGap(0, 50, Short.MAX_VALUE)))
+                        .addGap(0, 85, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -255,8 +297,8 @@ public class HopitalUI extends javax.swing.JFrame {
     }//GEN-LAST:event_hopitalTreeMouseReleased
     
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
             new SecondFrame(controleur, "Add");
             
         } catch (SQLException ex) {
@@ -267,7 +309,6 @@ public class HopitalUI extends javax.swing.JFrame {
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
             new SecondFrame(controleur, "Delete");
             
         } catch (SQLException ex) {
@@ -278,7 +319,6 @@ public class HopitalUI extends javax.swing.JFrame {
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
         // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
             new SecondFrame(controleur, "Find");
             controleur.updateModel();
             jTable1.setModel(controleur.model);
@@ -306,7 +346,7 @@ public class HopitalUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jMenuItemAdvSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdvSearchActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
@@ -317,7 +357,39 @@ public class HopitalUI extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jMenuItemAdvSearchActionPerformed
+
+    private void jMenuItemAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddActionPerformed
+        // TODO add your handling code here:
+        try {
+            new SecondFrame(controleur, "Add");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemAddActionPerformed
+
+    private void jMenuItemDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteActionPerformed
+        // TODO add your handling code here:
+        try {
+            new SecondFrame(controleur, "Delete");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemDeleteActionPerformed
+
+    private void jMenuItemFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindActionPerformed
+        // TODO add your handling code here:
+        try {
+            new SecondFrame(controleur, "Find");
+            controleur.updateModel();
+            jTable1.setModel(controleur.model);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemFindActionPerformed
     
     /**
      * Code se declenchera automatiquement avant le main à chaque fois.
@@ -402,15 +474,22 @@ public class HopitalUI extends javax.swing.JFrame {
     private final Controller controleur;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree hopitalTree;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonFind;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuChart;
     private javax.swing.JMenu jMenuEdit;
-    private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItemAdd;
+    private javax.swing.JMenuItem jMenuItemAdvSearch;
+    private javax.swing.JMenuItem jMenuItemDelete;
+    private javax.swing.JMenuItem jMenuItemFind;
     private javax.swing.JMenuItem jMenuItemUpdateModel;
+    private javax.swing.JMenu jMenuOptions;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenuTree;
     private javax.swing.JScrollPane jScrollPane1;

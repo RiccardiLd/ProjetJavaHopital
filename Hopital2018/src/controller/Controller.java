@@ -18,13 +18,13 @@ import model.*;
 public class Controller {
     
     
-    public MyModel model;
+    public MyTableModel model;
     public Connexion maConnexion;
     
     public Controller(String nameDatabase, String loginDatabase, String passwordDatabase, String host)
             throws SQLException, ClassNotFoundException {
         maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase, host);
-        model = new MyModel();
+        model = new MyTableModel();
     }
     
     public void findAll(String table) throws SQLException{
@@ -41,7 +41,7 @@ public class Controller {
     }
     
     public void updateModel() throws SQLException {
-        model = new MyModel();
+        model = new MyTableModel();
         model.addRow();
         
         System.out.println("\n**********************************");
@@ -71,79 +71,68 @@ public class Controller {
     
     private class RowData{
         
-        private Map<Integer, Object> values = new HashMap<Integer, Object>();
+        private Map<Integer, Object> valeurs = new HashMap<Integer, Object>();
         
-        public Object getValueForCol(int columnIndex) {
-            if(values.containsKey(columnIndex)){
-                return values.get(columnIndex);
+        public Object getColValue(int indexColonne) {
+            if(valeurs.containsKey(indexColonne)){
+                return valeurs.get(indexColonne);
             }
             return "";
         }
         
-        public void setValueForCol(Object aValue, int columnIndex) {
-            values.put(columnIndex, aValue);
+        public void setColValue(Object uneValeur, int indexColonne) {
+            valeurs.put(indexColonne, uneValeur);
         }
         
     }
     
-    public class MyModel extends AbstractTableModel{
+    public class MyTableModel extends AbstractTableModel{
         
-        int colIndex=0;
-        private List<Integer> cols = new ArrayList<Integer>();
-        private List<RowData> rows = new ArrayList<RowData>();
+        int indexColonnes=0;
+        private List<Integer> colonnes = new ArrayList<Integer>();
+        private List<RowData> lignes = new ArrayList<RowData>();
         
         @Override
-        public boolean isCellEditable(int rowIndex, int columnIndex) {
+        public boolean isCellEditable(int indexLigne, int indexColonne) {
             return true;
         }
         
         @Override
-        public String getColumnName(int column) {
-            return cols.get(column).toString();
+        public String getColumnName(int colonne) {
+            return colonnes.get(colonne).toString();
         }
         
         @Override
         public int getRowCount() {
-            return rows.size();
-        }
-        
-        public void addRow() {
-            rows.add(new RowData());
-            fireTableRowsInserted(rows.size(), rows.size());
-        }
-        
-        
-        /* public void removeRow(int selectedRow) {
-        rows.remove(selectedRow);
-        fireTableRowsDeleted(selectedRow, selectedRow);
-        }*/
-        
-        /* public void removeColumn(int selectedColumn) {
-        cols.remove(table.convertColumnIndexToModel(selectedColumn));
-        fireTableStructureChanged();
-        }*/
-        
-        public void addColumn() {
-            cols.add(++colIndex);
-            fireTableStructureChanged();
+            return lignes.size();
         }
         
         @Override
         public int getColumnCount() {
-            return cols.size();
+            return colonnes.size();
         }
         
         @Override
-        public Object getValueAt(int rowIndex, int columnIndex) {
-            RowData rowData = rows.get(rowIndex);
-            return rowData.getValueForCol(cols.get(columnIndex));
+        public Object getValueAt(int indexLigne, int indexColonne) {
+            RowData data = lignes.get(indexLigne);
+            return data.getColValue(colonnes.get(indexColonne));
         }
         
         @Override
-        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-            RowData rowData = rows.get(rowIndex);
-            rowData.setValueForCol(aValue,cols.get(columnIndex));
-            fireTableCellUpdated(rowIndex, columnIndex);
+        public void setValueAt(Object uneValeur, int indexLigne, int indexColonne) {
+            RowData data = lignes.get(indexLigne);
+            data.setColValue(uneValeur,colonnes.get(indexColonne));
+            fireTableCellUpdated(indexLigne, indexColonne);
+        }
+        
+        public void addRow() {
+            lignes.add(new RowData());
+            fireTableRowsInserted(lignes.size(), lignes.size());
+        }
+        
+        public void addColumn() {
+            colonnes.add(++indexColonnes);
+            fireTableStructureChanged();
         }
         
     }
