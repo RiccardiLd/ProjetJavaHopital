@@ -448,9 +448,9 @@ public class HopitalUI extends javax.swing.JFrame {
     private void jMenuItemChart1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart1ActionPerformed
         try {
             // TODO add your handling code here:
-            PieChart p = new PieChart(controleur);
-            //p.PieChambre(controleur);
-            p.affPieChart();
+            PieChart p1 = new PieChart(controleur,"SELECT nb_lits, COUNT(no_chambre) FROM `chambre` GROUP BY nb_lits", "Nombre de lits par chambre");
+            
+            p1.affPieChart();
             
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -459,10 +459,27 @@ public class HopitalUI extends javax.swing.JFrame {
 
     private void jMenuItemChart2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart2ActionPerformed
         // TODO add your handling code here:
+        
+           try {
+            // TODO add your handling code here:
+            PieChart p2 = new PieChart(controleur,"SELECT mutuelle, COUNT(nom) FROM `malade` GROUP BY mutuelle", "Nombre de Malade par Mutuelle");
+            p2.affPieChart();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItemChart2ActionPerformed
 
     private void jMenuItemChart3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart3ActionPerformed
         // TODO add your handling code here:
+           try {
+            // TODO add your handling code here:
+            PieChart p3 = new PieChart(controleur,"SELECT code_service, COUNT(no_malade) FROM `hospitalisation` GROUP BY code_service", "Répartition des malades par services");
+            p3.affPieChart();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItemChart3ActionPerformed
     
     /**
