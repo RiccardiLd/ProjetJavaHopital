@@ -119,7 +119,6 @@ public class Controller {
     }
     /**
      * Classe qui hérite de AbstractTableModel pour créer un custom Model
-     * Contient des méthodes qui ont été Overrided
      */
     public class MyTableModel extends AbstractTableModel{
         
