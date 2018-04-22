@@ -382,12 +382,12 @@ public class HopitalUI extends javax.swing.JFrame {
                 null,
                 operationalSystem,
                 operationalSystem[0]);
-        
-        if (OSChoix.equals("MacOS")) 
+        if (OSChoix == null)
+            System.exit(0);
+        else if (OSChoix.equals("MacOS")) 
             socket = ":8889";
         else if (OSChoix.equals("Windows"))
             socket = "";
-        
         
         int option = javax.swing.JOptionPane.showConfirmDialog(null,
                 message, 
