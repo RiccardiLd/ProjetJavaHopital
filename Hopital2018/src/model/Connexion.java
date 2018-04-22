@@ -1,20 +1,20 @@
 
 package model;
 /*
- * 
- * Librairies importées
- */
+*
+* Librairies importées
+*/
 import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * 
+ *
  * Connexion a votre BDD locale ou à distance sur le serveur de l'ECE via le tunnel SSH
- * 
+ *
  * @author segado
  */
 public class Connexion {
-
+    
     /**
      * Attributs prives : connexion JDBC, statement, ordre requete et resultat
      * requete
@@ -35,66 +35,98 @@ public class Connexion {
      * ArrayList public pour les requêtes de MAJ
      */
     public ArrayList<String> requetesMaj = new ArrayList<>();
-
+    
     /**
-     * Constructeur avec 3 paramètres : nom, login et password de la BDD locale
+     * Constructeur avec 4 paramètres : nom, login et password et socket la BDD locale
      *
      * @param nameDatabase
      * @param loginDatabase
      * @param passwordDatabase
+     * @param socket
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
+    public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase, String socket) 
+            throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
-
+        
         // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-        String urlDatabase = "jdbc:mysql://localhost:8889/" + nameDatabase;//  + nameDatabase;//!!!"8889" macOS only!!!
-        //création d'une connexion JDBC à la base 
+        String urlDatabase = "jdbc:mysql://localhost" + socket + "/" + nameDatabase;//  + nameDatabase;//!!!"8889" macOS only!!!
+        //création d'une connexion JDBC à la base
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
         //System.out.print(" "+urlDatabase +" " + loginDatabase + " " +passwordDatabase );
         stmt = conn.createStatement();
-        rset = stmt.executeQuery("select * from " + "docteur");
-        // création d'un ordre SQL (statement)
-        
-        
-        rsetMeta = rset.getMetaData();
-
+        //rset = stmt.executeQuery("select * from " + "docteur");
     }
-
     /**
-     * Constructeur avec 4 paramètres : username et password ECE, login et
-     * password de la BDD à distance sur le serveur de l'ECE
+     * Selectionne toutes les valeurs d'une table
+     * @param table nom de la table à récupérer sur la base
+     * @throws SQLException 
+     */
+    public void findAll(String table) throws SQLException {
+        rset = stmt.executeQuery("select * from " + table);
+        // création d'un ordre SQL (statement)
+        rsetMeta = rset.getMetaData();
+    }
+    /**
+     * Wild card - éxecute une requête
+     * @param query la requête à éxecuter
+     * @throws SQLException 
+     */
+    public void query(String query) throws SQLException {
+        rset = stmt.executeQuery(query);
+        // création d'un ordre SQL (statement)
+        rsetMeta = rset.getMetaData();
+        
+    }
+    /**
+     * Éxecute une requête spécifique - Update
+     * @param query la requête à éxecuter
+     * @throws SQLException 
+     */
+    public void queryUpdate(String query) throws SQLException {
+        System.out.println(query + " ok") ;
+        stmt = conn.createStatement();
+        stmt.executeUpdate(query);
+        // création d'un ordre SQL (statement)
+        //rsetMeta = rset.getMetaData();
+    }
+    
+    /**
+     * Constructeur avec 5 paramètres : username et password ECE, login,
+ password et socket de la BDD à distance sur le serveur de l'ECE
      * @param usernameECE
      * @param passwordECE
      * @param loginDatabase
      * @param passwordDatabase
+     * @param socket
      * @throws java.sql.SQLException
      * @throws java.lang.ClassNotFoundException
      */
-    public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
+    public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase, String socket) 
+            throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
-
+        
         // Connexion via le tunnel SSH avec le username et le password ECE
         SSHTunnel ssh = new SSHTunnel(usernameECE, passwordECE);
-
+        
         if (ssh.connect()) {
             System.out.println("Connexion reussie");
-
+            
             // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
             String urlDatabase = "jdbc:mysql://localhost:3305/" + usernameECE;
-
+            
             //création d'une connexion JDBC à la base
             conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
-
+            
             // création d'un ordre SQL (statement)
             stmt = conn.createStatement();
-
+            
         }
     }
-
+    
     /**
      * Méthode qui ajoute la table en parametre dans son ArrayList
      *
@@ -103,7 +135,7 @@ public class Connexion {
     public void ajouterTable(String table) {
         tables.add(table);
     }
-
+    
     /**
      * Méthode qui ajoute la requete de selection en parametre dans son
      * ArrayList
@@ -113,7 +145,7 @@ public class Connexion {
     public void ajouterRequete(String requete) {
         requetes.add(requete);
     }
-
+    
     /**
      * Méthode qui ajoute la requete de MAJ en parametre dans son
      * ArrayList
@@ -123,7 +155,7 @@ public class Connexion {
     public void ajouterRequeteMaj(String requete) {
         requetesMaj.add(requete);
     }
-
+    
     /**
      * Méthode qui retourne l'ArrayList des champs de la table en parametre
      *
@@ -134,14 +166,12 @@ public class Connexion {
     public ArrayList remplirChampsTable(String table) throws SQLException {
         // récupération de l'ordre de la requete
         
-        
-
         // récupération du résultat de l'ordre
         rsetMeta = rset.getMetaData();
-
+        
         // calcul du nombre de colonnes du resultat
         int nbColonne = rsetMeta.getColumnCount();
-
+        
         // creation d'une ArrayList de String
         ArrayList<String> liste;
         liste = new ArrayList<>();
@@ -150,58 +180,58 @@ public class Connexion {
         for (int i = 0; i < nbColonne; i++) {
             champs = champs + " " + rsetMeta.getColumnLabel(i + 1);
         }
-
+        
         // ajouter un "\n" à la ligne des champs
         champs = champs + "\n";
-
+        
         // ajouter les champs de la ligne dans l'ArrayList
         liste.add(champs);
-
+        
         // Retourner l'ArrayList
         return liste;
     }
-
+    
     /**
      * Methode qui retourne l'ArrayList des champs de la requete en parametre
      * @param requete
-     * @return 
+     * @return
      * @throws java.sql.SQLException
      */
     public ArrayList remplirChampsRequete(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
-
+        
         // récupération du résultat de l'ordre
         rsetMeta = rset.getMetaData();
-
+        
         // calcul du nombre de colonnes du resultat
         int nbColonne = rsetMeta.getColumnCount();
-
+        
         // creation d'une ArrayList de String
         ArrayList<String> liste;
         liste = new ArrayList<String>();
-
-        // tant qu'il reste une ligne 
+        
+        // tant qu'il reste une ligne
         while (rset.next()) {
             String champs;
             champs = rset.getString(1); // ajouter premier champ
-
+            
             // Concatener les champs de la ligne separes par ,
             for (int i = 1; i < nbColonne; i++) {
                 champs = champs + "," + rset.getString(i + 1);
             }
-
+            
             // ajouter un "\n" à la ligne des champs
             champs = champs + "\n";
-
+            
             // ajouter les champs de la ligne dans l'ArrayList
             liste.add(champs);
         }
-
+        
         // Retourner l'ArrayList
         return liste;
     }
-
+    
     /**
      * Méthode qui execute une requete de MAJ en parametre
      * @param requeteMaj
