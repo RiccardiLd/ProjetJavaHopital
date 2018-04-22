@@ -328,7 +328,7 @@ public class HopitalUI extends javax.swing.JFrame {
                 jTable1.setModel(controleur.model);
             }
             else JOptionPane.showMessageDialog(null,
-                        "Advanced search not supported for current table '" + table + ". Please choose either 'chambre' or 'malade'.",
+                        "Advanced search not supported for current table '" + table + "'. Please choose either 'chambre' or 'malade'.",
                         "Warning",
                         JOptionPane.WARNING_MESSAGE);
             
