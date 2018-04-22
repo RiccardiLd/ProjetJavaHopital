@@ -41,7 +41,7 @@ public class HopitalUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPopupMenuTree = new javax.swing.JPopupMenu();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         hopitalTree = new javax.swing.JTree();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -88,7 +88,7 @@ public class HopitalUI extends javax.swing.JFrame {
                 hopitalTreeMouseReleased(evt);
             }
         });
-        jScrollPane3.setViewportView(hopitalTree);
+        jScrollPane2.setViewportView(hopitalTree);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -221,7 +221,7 @@ public class HopitalUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,7 +240,7 @@ public class HopitalUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAdd)
@@ -255,7 +255,11 @@ public class HopitalUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Détecte un clique de la souris dans l'arbre du programme
+     * @param evt
+     */
     private void hopitalTreeMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hopitalTreeMouseReleased
         String path = hopitalTree.getClosestPathForLocation(evt.getX(), evt.getY()).toString();
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
@@ -277,51 +281,87 @@ public class HopitalUI extends javax.swing.JFrame {
             jPopupMenuTree.show(hopitalTree.getComponentAt(evt.getX(), evt.getY()), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_hopitalTreeMouseReleased
-    
+    /**
+     * Bouton "Add" appuyé
+     * @param evt
+     */
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         try {
-            new SecondFrame(controleur, "Add");
-            
+            if (generator.isValidTable())
+                new SecondFrame(controleur, "Add");
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot add to this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonAddActionPerformed
-
+    /**
+     * Bouton "Delete" appuyé
+     * @param evt
+     */
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         try {
-            new SecondFrame(controleur, "Delete");
-            
+            if (generator.isValidTable())
+                new SecondFrame(controleur, "Delete");
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot delete from this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
-
+    /**
+     * Bouton "Find" appuyé
+     * @param evt
+     */
     private void jButtonFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFindActionPerformed
         try {
-            new SecondFrame(controleur, "Find");
-            controleur.updateModel();
-            jTable1.setModel(controleur.model);
-            
+            if (generator.isValidTable()) {
+                new SecondFrame(controleur, "Find");
+                controleur.updateModel();
+                jTable1.setModel(controleur.model);
+            }
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot search from this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonFindActionPerformed
-
+    /**
+     * Met à jour le Model du tableau principal du programme
+     * @param evt
+     */
     private void jMenuItemUpdateModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateModelActionPerformed
         jTable1.setModel(controleur.model);
     }//GEN-LAST:event_jMenuItemUpdateModelActionPerformed
-
+    /**
+     * Bouton "Update" appuyé
+     * @param evt
+     */
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
         try {
-            new SecondFrame(controleur, "Update");
-            controleur.updateModel();
-            jTable1.setModel(controleur.model);
-            
+            if (generator.isValidTable()) {
+                new SecondFrame(controleur, "Update");
+                controleur.updateModel();
+                jTable1.setModel(controleur.model);
+            }
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot Update this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonUpdateActionPerformed
-
+    /**
+     * Réalise une recherche avancée
+     * @param evt
+     */
     private void jMenuItemAdvSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdvSearchActionPerformed
         
         try {
@@ -333,38 +373,62 @@ public class HopitalUI extends javax.swing.JFrame {
                 jTable1.setModel(controleur.model);
             }
             else JOptionPane.showMessageDialog(null,
-                        "Advanced search not supported for current table '" + table + "'. Please choose either 'chambre' or 'malade'.",
-                        "Warning",
-                        JOptionPane.WARNING_MESSAGE);
+                    "Advanced search not supported for current table '" + table + "'. Please choose either 'chambre' or 'malade'.",
+                    "Warning",
+                    JOptionPane.WARNING_MESSAGE);
             
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemAdvSearchActionPerformed
-
+    /**
+     * Alternative pour le bouton "Add"
+     * @param evt
+     */
     private void jMenuItemAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddActionPerformed
         try {
-            new SecondFrame(controleur, "Add");
-            
+            if (generator.isValidTable())
+                new SecondFrame(controleur, "Add");
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot Add to this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemAddActionPerformed
-
+    /**
+     * Alternative pour le bouton "Delete"
+     * @param evt
+     */
     private void jMenuItemDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteActionPerformed
         try {
-            new SecondFrame(controleur, "Delete");
+            if (generator.isValidTable())
+                new SecondFrame(controleur, "Delete");
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot delete from this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemDeleteActionPerformed
-
+    /**
+     * Alternative pour le bouton "Find"
+     * @param evt
+     */
     private void jMenuItemFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindActionPerformed
         try {
-            new SecondFrame(controleur, "Find");
-            controleur.updateModel();
-            jTable1.setModel(controleur.model);
+            if (generator.isValidTable()) {
+                new SecondFrame(controleur, "Find");
+                controleur.updateModel();
+                jTable1.setModel(controleur.model);
+            }
+            else JOptionPane.showMessageDialog(null,
+                    "You cannot search from this table. Please choose a valid table.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             
         } catch (SQLException ex) {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -492,7 +556,7 @@ public class HopitalUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenuTree;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

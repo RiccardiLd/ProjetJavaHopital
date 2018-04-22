@@ -20,26 +20,49 @@ public class Controller {
     
     public MyTableModel model;
     public Connexion maConnexion;
-    
+    /**
+     * Constructeur du controleur
+     * @param nameDatabase nom de la base de données, sera envoyé à Connexion
+     * @param loginDatabase utilisateur de la base de données, sera envoyé à Connexion
+     * @param passwordDatabase mot-de-passe de l'utilisateur de la base de données, sera envoyé à Connexion
+     * @param socket porte d'accès de la base de données, sera envoyé à Connexion
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public Controller(String nameDatabase, String loginDatabase, String passwordDatabase, String socket)
             throws SQLException, ClassNotFoundException {
         maConnexion = new Connexion(nameDatabase, loginDatabase, passwordDatabase, socket);
         model = new MyTableModel();
     }
-    
+    /**
+     * Appelle la méthode findAll de Connexion
+     * @param table table de la base de données sur la quelle la requête se fera
+     * @throws SQLException 
+     */
     public void findAll(String table) throws SQLException{
         maConnexion.findAll(table);
     }
-    
+    /**
+     * Appelle le wild card de Connexion pour envoyer une requête à la base de données
+     * @param query la requête envoyée
+     * @throws SQLException 
+     */
     public void query(String query) throws SQLException {
         maConnexion.query(query);
-        
-        updateModel(); ///A VERIFIER
     }
+    /**
+     * Appelle la méthode de Connexion portant le même nom
+     * @param query la requête de update envoyée
+     * @throws SQLException 
+     */
     public void queryUpdate(String query) throws SQLException {
         maConnexion.queryUpdate(query);
     }
-    
+    /**
+     * Sert à mettre à jour la JTable1 (tableau principal) de HopitalUI
+     * Cette méthode transforme tout resultat de requête sql en TableModel
+     * @throws SQLException 
+     */
     public void updateModel() throws SQLException {
         model = new MyTableModel();
         model.addRow();
@@ -68,24 +91,35 @@ public class Controller {
             j++;
         }
     }
-    
+    /**
+     * Classe privée de Controller utilisée par MyTableModel
+     */
     private class RowData{
         
         private Map<Integer, Object> valeurs = new HashMap<Integer, Object>();
-        
+        /**
+         * @param indexColonne l'index de la colonne
+         * @return la valeur contenue dans la colonne si elle  existe
+         */
         public Object getColValue(int indexColonne) {
             if(valeurs.containsKey(indexColonne)){
                 return valeurs.get(indexColonne);
             }
             return "";
         }
-        
+        /**
+         * 
+         * @param uneValeur valeur à attribuer à la colonne
+         * @param indexColonne colonne à laquelle la valeur sera attribuée
+         */
         public void setColValue(Object uneValeur, int indexColonne) {
             valeurs.put(indexColonne, uneValeur);
         }
         
     }
-    
+    /**
+     * Classe qui hérite de AbstractTableModel pour créer un custom Model
+     */
     public class MyTableModel extends AbstractTableModel{
         
         int indexColonnes=0;
