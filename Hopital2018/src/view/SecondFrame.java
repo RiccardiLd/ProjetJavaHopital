@@ -1,5 +1,5 @@
 /*  Created by riccardild on Apr 20, 2018 3:54:55 PM
-*  (C) Copyright Gianni Riccardi.
+*  (C) Copyright Gianni Riccardi, Théo Minier, Marie-Claire Belamy.
 */
 package view;
 
@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 /**
  *
  * @author riccardild
+ * @author theo
+ * @author marie-claire
  */
 public class SecondFrame extends JFrame{
     

@@ -1,7 +1,7 @@
 package view;
 
 /*  Created by riccardild on Apr 19, 2018 11:04:07 AM
-*  (C) Copyright Gianni Riccardi.
+*  (C) Copyright Gianni Riccardi, Théo Minier, Marie-Claire Belamy.
 */
 
 import controller.*;
@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author riccardild
+ * @author theo
+ * @author marie-claire
  */
 public class HopitalUI extends javax.swing.JFrame {
     
@@ -54,9 +56,9 @@ public class HopitalUI extends javax.swing.JFrame {
         jMenuOptions = new javax.swing.JMenu();
         jMenuItemAdvSearch = new javax.swing.JMenuItem();
         jMenuChart = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItemChart1 = new javax.swing.JMenuItem();
+        jMenuItemChart2 = new javax.swing.JMenuItem();
+        jMenuItemChart3 = new javax.swing.JMenuItem();
         jMenuEdit = new javax.swing.JMenu();
         jMenuItemAdd = new javax.swing.JMenuItem();
         jMenuItemDelete = new javax.swing.JMenuItem();
@@ -154,14 +156,29 @@ public class HopitalUI extends javax.swing.JFrame {
 
         jMenuChart.setText("New chart...");
 
-        jMenuItem1.setText("Chart 1");
-        jMenuChart.add(jMenuItem1);
+        jMenuItemChart1.setText("Nombre de lits par chambre");
+        jMenuItemChart1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemChart1ActionPerformed(evt);
+            }
+        });
+        jMenuChart.add(jMenuItemChart1);
 
-        jMenuItem2.setText("Chart 2");
-        jMenuChart.add(jMenuItem2);
+        jMenuItemChart2.setText("Répartition des malades par mutuelle");
+        jMenuItemChart2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemChart2ActionPerformed(evt);
+            }
+        });
+        jMenuChart.add(jMenuItemChart2);
 
-        jMenuItem3.setText("Chart 3");
-        jMenuChart.add(jMenuItem3);
+        jMenuItemChart3.setText("Répartition des malades par services");
+        jMenuItemChart3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemChart3ActionPerformed(evt);
+            }
+        });
+        jMenuChart.add(jMenuItemChart3);
 
         jMenuOptions.add(jMenuChart);
 
@@ -429,6 +446,36 @@ public class HopitalUI extends javax.swing.JFrame {
             Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemFindActionPerformed
+
+    private void jMenuItemChart1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart1ActionPerformed
+        try {
+            PieChart p1 = new PieChart(controleur,"SELECT nb_lits, COUNT(no_chambre) FROM `chambre` GROUP BY nb_lits", "Nombre de lits par chambre");
+            p1.affPieChart();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemChart1ActionPerformed
+
+    private void jMenuItemChart2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart2ActionPerformed
+           try {
+            PieChart p2 = new PieChart(controleur,"SELECT mutuelle, COUNT(nom) FROM `malade` GROUP BY mutuelle", "Nombre de Malade par Mutuelle");
+            p2.affPieChart();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemChart2ActionPerformed
+
+    private void jMenuItemChart3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChart3ActionPerformed
+           try {
+            PieChart p3 = new PieChart(controleur,"SELECT code_service, COUNT(no_malade) FROM `hospitalisation` GROUP BY code_service", "Répartition des malades par services");
+            p3.affPieChart();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HopitalUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemChart3ActionPerformed
     
     /**
      * Code static qui se declenchera automatiquement avant le main à chaque fois.
@@ -527,11 +574,11 @@ public class HopitalUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuChart;
     private javax.swing.JMenu jMenuEdit;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemAdd;
     private javax.swing.JMenuItem jMenuItemAdvSearch;
+    private javax.swing.JMenuItem jMenuItemChart1;
+    private javax.swing.JMenuItem jMenuItemChart2;
+    private javax.swing.JMenuItem jMenuItemChart3;
     private javax.swing.JMenuItem jMenuItemDelete;
     private javax.swing.JMenuItem jMenuItemFind;
     private javax.swing.JMenuItem jMenuItemUpdateModel;

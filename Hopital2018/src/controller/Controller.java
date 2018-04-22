@@ -1,5 +1,5 @@
 /*  Created by riccardild on Apr 20, 2018 11:36:04 AM
-*  (C) Copyright Gianni Riccardi.
+*  (C) Copyright Gianni Riccardi, Théo Minier, Marie-Claire Belamy.
 */
 package controller;
 
@@ -14,6 +14,8 @@ import model.*;
 /**
  *
  * @author riccardild
+ * @author theo
+ * @author marie-claire
  */
 public class Controller {
     
